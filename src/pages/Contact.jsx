@@ -127,13 +127,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Note */}
-        <div className="text-center mt-16">
-          <p className="text-red-500 italic">
-            looking for some sort of contact<br/>
-            link like this
-          </p>
-        </div>
       </div>
 
       {/* Back to Home */}

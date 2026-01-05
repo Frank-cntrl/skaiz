@@ -1,14 +1,25 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Video from './pages/Video'
+import Editorial from './pages/Editorial'
+import Documentary from './pages/Documentary'
+import Contact from './pages/Contact'
+
 function App() {
   return (
-    <div>
-      <h1>Testing Tailwind</h1>
-      <div className="w-64 h-64 bg-red-500">
-        RED BOX - If you see this text but no red background, Tailwind isn't working
+    <Router>
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/video" element={<Video />} />
+          <Route path="/editorial" element={<Editorial />} />
+          <Route path="/documentary" element={<Documentary />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
-      <div style={{width: '200px', height: '200px', backgroundColor: 'blue'}}>
-        BLUE BOX - This uses inline styles and should always work
-      </div>
-    </div>
+    </Router>
   )
 }
 

@@ -82,11 +82,6 @@ const Home = () => {
               <div className="text-center relative">
                 <h2 className="text-2xl font-serif mb-6">documentary</h2>
                 
-                {/* Handwritten note */}
-                <div className="absolute -top-2 right-0 text-red-500 italic text-sm transform rotate-12">
-                  <div>titles are handwritten</div>
-                  <div>(I will send scanned files)</div>
-                </div>
                 
                 <div className="border-4 border-red-500 p-6 min-h-[180px] flex flex-col justify-center hover:bg-red-50 transition-colors duration-300">
                   <div className="text-center">

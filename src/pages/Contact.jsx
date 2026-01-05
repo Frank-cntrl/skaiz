@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     message: '',
   })
@@ -22,13 +23,9 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white text-black pt-20">
-      {/* Page Title */}
-      <div className="text-center py-12">
-        <h1 className="text-4xl font-serif tracking-wider">Contact</h1>
-      </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-8 pb-24">
+      <div className="max-w-4xl mx-auto px-8 pb-24 pt-12">
         
         {/* Location */}
         <div className="text-center mb-12">
@@ -64,6 +61,8 @@ const Contact = () => {
                   <input
                     type="text"
                     name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-black"
                     placeholder="First name"
                   />
@@ -75,6 +74,8 @@ const Contact = () => {
                   <input
                     type="text"
                     name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-black"
                     placeholder="Last name"
                   />
@@ -89,6 +90,8 @@ const Contact = () => {
                 <input
                   type="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-black"
                   placeholder="Email"
                 />
@@ -101,6 +104,8 @@ const Contact = () => {
                 </label>
                 <textarea
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={5}
                   className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-black resize-none"
                   placeholder="Your message..."
@@ -126,7 +131,6 @@ const Contact = () => {
             />
           </div>
         </div>
-
       </div>
 
       {/* Back to Home */}

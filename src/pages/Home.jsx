@@ -21,12 +21,15 @@ const Home = () => {
         </a>
       </div>
 
+      {/* Mobile SKAIZ Logo - Only visible on mobile */}
+      <div className="md:hidden text-center py-8">
+        <h1 className="font-serif text-5xl text-red-500 tracking-wider transform -rotate-3">
+          SKAIZ
+        </h1>
+      </div>
+
       {/* Main Grid Layout */}
       <div className="min-h-screen flex flex-col justify-center px-8 py-16">
-        {/* Top Section - Homepage Title */}
-        <div className="text-center mb-16">
-          <h1 className="text-2xl tracking-wider text-black">homepage</h1>
-        </div>
 
         {/* Main Content Grid */}
         <div className="max-w-6xl mx-auto w-full">
@@ -48,8 +51,8 @@ const Home = () => {
               </div>
             </Link>
 
-            {/* Center SKAIZ Logo */}
-            <div className="text-center">
+            {/* Center SKAIZ Logo - Only visible on desktop */}
+            <div className="text-center hidden md:block">
               <h1 className="font-serif text-6xl md:text-8xl text-red-500 tracking-wider transform -rotate-3">
                 SKAIZ
               </h1>

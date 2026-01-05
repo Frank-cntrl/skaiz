@@ -100,26 +100,10 @@ const Documentary = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      {/* Page Title */}
-      <div className="text-center py-12 pt-20">
-        <h1 className="text-4xl font-serif tracking-wider">documentary</h1>
-      </div>
-
-      {/* Instructions */}
-      <div className="max-w-6xl mx-auto px-8 mb-8">
-        <div className="text-red-500 italic text-left">
-          <p className="mb-2">organized by color</p>
-          <p className="mb-2">documentary stills</p>
-          <p className="mb-2">and behind the scenes</p>
-          <p className="mb-6">2-3 per row</p>
-          <p>color gradient</p>
-          <p>organization</p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white text-black pt-20">
 
       {/* Seamless Color-Gradient Gallery */}
-      <div className="max-w-7xl mx-auto px-8 pb-24">
+      <div className="max-w-7xl mx-auto px-8 pb-24 pt-12">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-min">
           {documentaryImages.map((image, index) => (
             <div

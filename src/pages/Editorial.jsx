@@ -3,101 +3,82 @@ const Editorial = () => {
     {
       id: 1,
       src: 'https://images.unsplash.com/photo-1469460340997-2f854421e72f?w=800&q=80',
-      alt: 'Fashion Editorial 1',
+      alt: 'Editorial 1',
       size: 'medium'
     },
     {
       id: 2,
       src: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80',
-      alt: 'Fashion Editorial 2',
+      alt: 'Editorial 2',
       size: 'medium'
     },
     {
       id: 3,
       src: 'https://images.unsplash.com/photo-1503236823255-94609f598e71?w=800&q=80',
-      alt: 'Fashion Editorial 3',
+      alt: 'Editorial 3',
       size: 'large'
     },
     {
       id: 4,
       src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80',
-      alt: 'Fashion Editorial 4',
+      alt: 'Editorial 4',
       size: 'medium'
     },
     {
       id: 5,
       src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-      alt: 'Fashion Editorial 5',
+      alt: 'Editorial 5',
       size: 'small'
     },
     {
       id: 6,
       src: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80',
-      alt: 'Fashion Editorial 6',
+      alt: 'Editorial 6',
       size: 'small'
     },
     {
       id: 7,
       src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80',
-      alt: 'Fashion Editorial 7',
+      alt: 'Editorial 7',
       size: 'small'
     },
     {
       id: 8,
       src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80',
-      alt: 'Fashion Editorial 8',
+      alt: 'Editorial 8',
       size: 'medium'
     },
     {
       id: 9,
       src: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=800&q=80',
-      alt: 'Fashion Editorial 9',
+      alt: 'Editorial 9',
       size: 'small'
     },
     {
       id: 10,
       src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
-      alt: 'Fashion Editorial 10',
+      alt: 'Editorial 10',
       size: 'large'
     },
     {
       id: 11,
       src: 'https://images.unsplash.com/photo-1506629905607-bfa2d2c88e3e?w=800&q=80',
-      alt: 'Fashion Editorial 11',
+      alt: 'Editorial 11',
       size: 'medium'
     },
     {
       id: 12,
       src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80',
-      alt: 'Fashion Editorial 12',
+      alt: 'Editorial 12',
       size: 'medium'
     },
   ]
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      {/* Page Title */}
-      <div className="text-center py-12 pt-20">
-        <h1 className="text-4xl font-serif tracking-wider">editorial</h1>
-      </div>
-
-      {/* Instructions */}
-      <div className="max-w-6xl mx-auto px-8 mb-8">
-        <div className="text-red-500 italic text-left">
-          <p className="mb-2">simple gallery</p>
-          <p className="mb-2">of multiple</p>
-          <p className="mb-2">images</p>
-          <p className="mb-6">2-3 per row</p>
-          <p>* "light" and</p>
-          <p>"drawing"</p>
-          <p>page will be</p>
-          <p>same</p>
-          <p>format</p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white text-black pt-20">
 
       {/* Masonry Gallery */}
-      <div className="max-w-7xl mx-auto px-8 pb-24">
+      <div className="max-w-7xl mx-auto px-8 pb-24 pt-12">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-min">
           {editorialImages.map((image, index) => (
             <div

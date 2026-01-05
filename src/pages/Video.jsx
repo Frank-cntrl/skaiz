@@ -34,23 +34,9 @@ const Video = () => {
 
   return (
     <div className="min-h-screen bg-white text-black pt-20">
-      {/* Page Title */}
-      <div className="text-center py-12">
-        <h1 className="text-4xl font-serif tracking-wider">video</h1>
-      </div>
-
-      {/* Instructions */}
-      <div className="max-w-4xl mx-auto px-8 mb-12">
-        <div className="text-red-500 italic text-center mb-8">
-          <p className="mb-2">moving clips of videos with</p>
-          <p className="mb-2">link to youtube for full video</p>
-          <p className="mb-4">stacked format</p>
-          <p>only one video per row</p>
-        </div>
-      </div>
 
       {/* Video Stack */}
-      <div className="max-w-4xl mx-auto px-8 pb-24">
+      <div className="max-w-4xl mx-auto px-8 pb-24 pt-12">
         <div className="space-y-16">
           {videos.map((video, index) => (
             <div key={video.id} className="group">

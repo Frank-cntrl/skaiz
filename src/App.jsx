@@ -1,24 +1,89 @@
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import Video from './pages/Video'
-import Editorial from './pages/Editorial'
-import Documentary from './pages/Documentary'
-import Contact from './pages/Contact'
+import CountdownScreen from './components/CountdownScreen'
+
+// Lazy load all main site components to prevent code access
+const Navbar = lazy(() => import('./components/Navbar'))
+const Home = lazy(() => import('./pages/home'))
+const Video = lazy(() => import('./pages/Video'))
+const Editorial = lazy(() => import('./pages/Editorial'))
+const Documentary = lazy(() => import('./pages/Documentary'))
+const Contact = lazy(() => import('./pages/Contact'))
+
+// Loading fallback component
+const LoadingScreen = () => (
+  <div className="min-h-screen bg-black flex items-center justify-center">
+    <div className="text-white text-2xl font-serif">Loading...</div>
+  </div>
+)
 
 function App() {
+  const [countdownStatus, setCountdownStatus] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Fetch countdown status from backend
+    const checkCountdown = async () => {
+      try {
+        const apiUrl = import.meta.env.DEV 
+          ? 'http://localhost:8080/api/countdown'
+          : '/api/countdown'
+        
+        const response = await fetch(apiUrl)
+        const data = await response.json()
+        setCountdownStatus(data)
+      } catch (error) {
+        console.error('Failed to fetch countdown status:', error)
+        // On error, default to showing countdown
+        setCountdownStatus({
+          isRevealed: false,
+          revealDate: null,
+          timeRemaining: 0
+        })
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkCountdown()
+    // Check for countdown updates (interval from backend config or default 60s)
+    const refreshInterval = countdownStatus?.config?.refreshInterval || 60000
+    const interval = setInterval(checkCountdown, refreshInterval)
+    
+    return () => clearInterval(interval)
+  }, [])
+
+  // Show loading state
+  if (isLoading) {
+    return <LoadingScreen />
+  }
+
+  // Show countdown screen if not revealed
+  if (!countdownStatus?.isRevealed) {
+    return (
+      <CountdownScreen 
+        revealDate={countdownStatus?.revealDate}
+        timeRemaining={countdownStatus?.timeRemaining || 0}
+        config={countdownStatus?.config}
+      />
+    )
+  }
+
+  // Show main site after reveal
   return (
     <Router>
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/video" element={<Video />} />
-          <Route path="/editorial" element={<Editorial />} />
-          <Route path="/documentary" element={<Documentary />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
+      <Suspense fallback={<LoadingScreen />}>
+        <div className="min-h-screen bg-white">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/editorial" element={<Editorial />} />
+            <Route path="/documentary" element={<Documentary />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+      </Suspense>
     </Router>
   )
 }

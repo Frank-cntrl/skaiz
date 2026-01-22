@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import CountdownScreen from './components/CountdownScreen'
 
 // Lazy load all main site components to prevent code access
-const Navbar = lazy(() => import('./components/Navbar'))
-const Home = lazy(() => import('./pages/home'))
-const Video = lazy(() => import('./pages/Video'))
-const Editorial = lazy(() => import('./pages/Editorial'))
-const Documentary = lazy(() => import('./pages/Documentary'))
-const Contact = lazy(() => import('./pages/Contact'))
+const Navbar = lazy(() => import('./components/Navbar.jsx'))
+const Home = lazy(() => import('./pages/home.jsx'))
+const Video = lazy(() => import('./pages/Video.jsx'))
+const Editorial = lazy(() => import('./pages/Editorial.jsx'))
+const Documentary = lazy(() => import('./pages/Documentary.jsx'))
+const Contact = lazy(() => import('./pages/Contact.jsx'))
 
 // Loading fallback component
 const LoadingScreen = () => (
@@ -25,9 +25,10 @@ function App() {
     // Fetch countdown status from backend
     const checkCountdown = async () => {
       try {
-        const apiUrl = import.meta.env.DEV 
-          ? 'http://localhost:8080/api/countdown'
-          : '/api/countdown'
+        const apiUrl = import.meta.env.VITE_API_URL || 
+          (import.meta.env.DEV 
+            ? 'http://localhost:8080/api/countdown'
+            : '/api/countdown')
         
         const response = await fetch(apiUrl)
         const data = await response.json()

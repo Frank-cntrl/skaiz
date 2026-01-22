@@ -41,19 +41,18 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
   }, [revealDate]);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center overflow-hidden relative">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black flex flex-col items-center justify-center overflow-hidden relative px-8">
+      {/* Logo Image - Moved Up */}
+      <div className="relative z-10 -mb-32 md:-mb-40 lg:-mb-48">
         <img
           src={screenConfig.backgroundImage}
           alt={`${screenConfig.title} ${screenConfig.subtitle}`}
-          className="w-full h-full object-cover opacity-100"
+          className="w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[576px] lg:h-[576px] object-contain mx-auto"
         />
-        <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-8 max-w-4xl">
+      <div className="relative z-10 text-center max-w-4xl">
         {/* Logo - Hidden since it's in the background image */}
         {/* <div className="mb-12">
           <h1 className="font-serif text-7xl md:text-9xl text-red-500 tracking-wider transform -rotate-3 drop-shadow-2xl">
@@ -67,7 +66,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
         </div> */}
 
         {/* Countdown Timer */}
-        <div className="mb-8 mt-32">
+        <div className="mb-8">
           <p className="text-white/80 text-sm md:text-base uppercase tracking-widest mb-8">
             {screenConfig.message}
           </p>
@@ -83,7 +82,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
                 <div className="text-3xl md:text-5xl font-bold text-white mb-2">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-xs md:text-sm text-white/60 uppercase tracking-wider">
+                <div className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider">
                   {item.label}
                 </div>
               </div>
@@ -91,25 +90,9 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
           </div>
         </div>
 
-        {/* Reveal Date */}
-        {revealDate && (
-          <div className="mt-12">
-            <p className="text-white/60 text-sm tracking-wide">
-              Revealing on {new Date(revealDate).toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </p>
-          </div>
-        )}
-
         {/* Social Links */}
         {screenConfig.socialLinks?.instagram && (
-          <div className="mt-16">
+          <div className="mt-16 mb-12">
             <a 
               href={screenConfig.socialLinks.instagram}
               target="_blank" 

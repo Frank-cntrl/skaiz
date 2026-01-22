@@ -4,7 +4,7 @@ import CountdownScreen from './components/CountdownScreen'
 
 // Lazy load all main site components to prevent code access
 const Navbar = lazy(() => import('./components/Navbar.jsx'))
-const Home = lazy(() => import('./pages/Home.jsx'))
+const Home = lazy(() => import('./pages/home.jsx'))
 const Video = lazy(() => import('./pages/Video.jsx'))
 const Editorial = lazy(() => import('./pages/Editorial.jsx'))
 const Documentary = lazy(() => import('./pages/Documentary.jsx'))

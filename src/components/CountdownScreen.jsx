@@ -41,7 +41,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
   }, [revealDate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black flex flex-col items-center justify-center overflow-hidden relative px-8">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center overflow-hidden relative px-8">
       {/* Logo Image - Moved Up */}
       <div className="relative z-10 -mb-32 md:-mb-40 lg:-mb-48">
         <img
@@ -67,7 +67,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
 
         {/* Countdown Timer */}
         <div className="mb-8">
-          <p className="text-white/80 text-sm md:text-base uppercase tracking-widest mb-8">
+          <p className="text-black/80 text-sm md:text-base uppercase tracking-widest mb-8">
             {screenConfig.message}
           </p>
           
@@ -78,11 +78,11 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
               { value: countdown.minutes, label: 'Minutes' },
               { value: countdown.seconds, label: 'Seconds' }
             ].map((item, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm border-2 border-red-500/30 rounded-lg p-4 md:p-6">
-                <div className="text-3xl md:text-5xl font-bold text-white mb-2">
+              <div key={index} className="bg-black/5 backdrop-blur-sm border-2 border-red-500/30 rounded-lg p-4 md:p-6">
+                <div className="text-3xl md:text-5xl font-bold text-black mb-2">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-[10px] md:text-xs text-white/60 uppercase tracking-wider">
+                <div className="text-[10px] md:text-xs text-black/60 uppercase tracking-wider">
                   {item.label}
                 </div>
               </div>
@@ -97,7 +97,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
               href={screenConfig.socialLinks.instagram}
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-white/70 hover:text-red-500 text-sm tracking-widest transition-colors duration-300 uppercase"
+              className="text-black/70 hover:text-red-500 text-sm tracking-widest transition-colors duration-300 uppercase"
             >
               Follow on Instagram →
             </a>
@@ -110,7 +110,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute bg-white rounded-full animate-pulse"
+            className="absolute bg-gray-400 rounded-full animate-pulse"
             style={{
               width: Math.random() * 3 + 1 + 'px',
               height: Math.random() * 3 + 1 + 'px',

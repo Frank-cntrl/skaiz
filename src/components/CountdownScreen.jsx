@@ -47,7 +47,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
         <img
           src={screenConfig.backgroundImage}
           alt={`${screenConfig.title} ${screenConfig.subtitle}`}
-          className="w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[576px] lg:h-[576px] object-contain mx-auto -mt-40"
+          className="w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[576px] lg:h-[576px] object-contain mx-auto -mt-32"
         />
       </div>
 
@@ -59,7 +59,10 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
           loop
           muted
           playsInline
+          preload="auto"
           className="w-full h-auto rounded-lg shadow-lg"
+          onError={(e) => console.error('Video failed to load:', e)}
+          onLoadedData={() => console.log('Video loaded successfully')}
         />
       </div>
 

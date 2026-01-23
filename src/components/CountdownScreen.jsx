@@ -41,13 +41,25 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
   }, [revealDate]);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center overflow-hidden relative px-8">
-      {/* Logo Image - Moved Up */}
+    <div className="min-h-screen bg-white flex flex-col items-center justify-start overflow-hidden relative px-8 pt-4">
+      {/* Logo Image - Original Size */}
       <div className="relative z-10 -mb-32 md:-mb-40 lg:-mb-48">
         <img
           src={screenConfig.backgroundImage}
           alt={`${screenConfig.title} ${screenConfig.subtitle}`}
-          className="w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[576px] lg:h-[576px] object-contain mx-auto"
+          className="w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[576px] lg:h-[576px] object-contain mx-auto -mt-40"
+        />
+      </div>
+
+      {/* Looping Video */}
+      <div className="relative z-10 mb-8 w-full max-w-4xl">
+        <video
+          src="/memories-sequence.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-auto rounded-lg shadow-lg"
         />
       </div>
 

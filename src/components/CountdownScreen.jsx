@@ -52,17 +52,17 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
       </div>
 
       {/* Looping Video */}
-      <div className="relative z-10 mb-8 w-full max-w-4xl">
+      <div className="relative z-10 mb-8 w-full max-w-4xl px-4">
         <video
           src="/memories-sequence.mp4"
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
-          className="w-full h-auto rounded-lg shadow-lg"
-          onError={(e) => console.error('Video failed to load:', e)}
-          onLoadedData={() => console.log('Video loaded successfully')}
+          className="w-full rounded-lg shadow-lg"
+          style={{ maxHeight: '500px', objectFit: 'contain' }}
+          onError={(e) => console.error('Video error:', e.target.error)}
+          onLoadedData={() => console.log('✅ Video loaded')}
         />
       </div>
 

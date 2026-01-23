@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
+  const videoRef = useRef(null);
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -40,6 +41,32 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
     return () => clearInterval(interval);
   }, [revealDate]);
 
+  // Force video autoplay on all devices
+  useEffect(() => {
+    const playVideo = async () => {
+      if (videoRef.current) {
+        try {
+          // Attempt to play the video programmatically
+          await videoRef.current.play();
+          console.log('✅ Video autoplay successful');
+        } catch (error) {
+          console.warn('Video autoplay failed:', error);
+          // If autoplay fails, try again after a short delay
+          setTimeout(async () => {
+            try {
+              await videoRef.current.play();
+              console.log('✅ Video autoplay successful on retry');
+            } catch (retryError) {
+              console.error('Video autoplay failed on retry:', retryError);
+            }
+          }, 500);
+        }
+      }
+    };
+
+    playVideo();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-start overflow-hidden relative px-8 pt-4">
       {/* Logo Image - Original Size */}
@@ -54,15 +81,29 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
       {/* Looping Video */}
       <div className="relative z-10 mb-8 w-full max-w-4xl px-4">
         <video
+          ref={videoRef}
           src="/memories-sequence.mp4?v=4"
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          controls={false}
           className="w-full rounded-lg"
-          style={{ maxHeight: '500px', objectFit: 'contain' }}
+          style={{ 
+            maxHeight: '500px', 
+            objectFit: 'contain',
+            pointerEvents: 'none' // Prevent any click interactions that might show controls
+          }}
           onError={(e) => console.error('Video error:', e.target.error)}
           onLoadedData={() => console.log('✅ Video loaded')}
+          onLoadedMetadata={() => {
+            console.log('✅ Video metadata loaded');
+            // Attempt to play as soon as metadata is loaded
+            if (videoRef.current) {
+              videoRef.current.play().catch(err => console.warn('Play on metadata load failed:', err));
+            }
+          }}
         />
       </div>
 

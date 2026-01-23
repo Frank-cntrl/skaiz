@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
   const videoRef = useRef(null);
+  const [showPlayButton, setShowPlayButton] = useState(false);
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -41,30 +42,91 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
     return () => clearInterval(interval);
   }, [revealDate]);
 
-  // Force video autoplay on all devices
+  // Force video autoplay on all devices with multiple fallback strategies
   useEffect(() => {
     const playVideo = async () => {
       if (videoRef.current) {
         try {
+          // Reset video to beginning
+          videoRef.current.currentTime = 0;
+          videoRef.current.load();
+          
           // Attempt to play the video programmatically
-          await videoRef.current.play();
-          console.log('✅ Video autoplay successful');
+          const playPromise = videoRef.current.play();
+          
+          if (playPromise !== undefined) {
+            await playPromise;
+            console.log('✅ Video autoplay successful');
+            setShowPlayButton(false);
+          }
         } catch (error) {
-          console.warn('Video autoplay failed:', error);
-          // If autoplay fails, try again after a short delay
+          console.warn('Video autoplay failed:', error.name, error.message);
+          
+          // Try delayed retry
           setTimeout(async () => {
             try {
               await videoRef.current.play();
-              console.log('✅ Video autoplay successful on retry');
-            } catch (retryError) {
-              console.error('Video autoplay failed on retry:', retryError);
+              console.log('✅ Video play successful on delayed retry');
+              setShowPlayButton(false);
+            } catch (err) {
+              console.warn('Delayed retry failed:', err.message);
+              // Show play button as last resort
+              setShowPlayButton(true);
+              
+              // Set up listeners for any user interaction
+              const playOnInteraction = async () => {
+                try {
+                  await videoRef.current.play();
+                  console.log('✅ Video play successful on user interaction');
+                  setShowPlayButton(false);
+                  // Remove all listeners after successful play
+                  document.removeEventListener('click', playOnInteraction);
+                  document.removeEventListener('touchstart', playOnInteraction);
+                } catch (err) {
+                  console.warn('User interaction play failed:', err.message);
+                }
+              };
+              
+              document.addEventListener('click', playOnInteraction);
+              document.addEventListener('touchstart', playOnInteraction);
             }
           }, 500);
         }
       }
     };
 
+    // Initial play attempt
     playVideo();
+    
+    // Monitor video playing state
+    const handlePlay = () => {
+      console.log('Video is playing');
+      setShowPlayButton(false);
+    };
+    
+    const handlePause = () => {
+      console.log('Video paused');
+      // Only show play button if video was paused unexpectedly
+      if (videoRef.current && !videoRef.current.ended) {
+        setShowPlayButton(true);
+      }
+    };
+    
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.addEventListener('play', handlePlay);
+      videoElement.addEventListener('playing', handlePlay);
+      videoElement.addEventListener('pause', handlePause);
+    }
+    
+    // Cleanup function
+    return () => {
+      if (videoElement) {
+        videoElement.removeEventListener('play', handlePlay);
+        videoElement.removeEventListener('playing', handlePlay);
+        videoElement.removeEventListener('pause', handlePause);
+      }
+    };
   }, []);
 
   return (
@@ -80,31 +142,105 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
 
       {/* Looping Video */}
       <div className="relative z-10 mb-8 w-full max-w-4xl px-4">
-        <video
-          ref={videoRef}
-          src="/memories-sequence.mp4?v=4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          controls={false}
-          className="w-full rounded-lg"
-          style={{ 
-            maxHeight: '500px', 
-            objectFit: 'contain',
-            pointerEvents: 'none' // Prevent any click interactions that might show controls
-          }}
-          onError={(e) => console.error('Video error:', e.target.error)}
-          onLoadedData={() => console.log('✅ Video loaded')}
-          onLoadedMetadata={() => {
-            console.log('✅ Video metadata loaded');
-            // Attempt to play as soon as metadata is loaded
-            if (videoRef.current) {
-              videoRef.current.play().catch(err => console.warn('Play on metadata load failed:', err));
-            }
-          }}
-        />
+        <div className="relative">
+          <video
+            ref={videoRef}
+            src="/memories-sequence.mp4?v=5"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            controls={false}
+            webkit-playsinline="true"
+            x5-playsinline="true"
+            className="w-full rounded-lg cursor-pointer"
+            style={{ 
+              maxHeight: '500px', 
+              objectFit: 'contain'
+            }}
+            onClick={async (e) => {
+              e.preventDefault();
+              if (videoRef.current) {
+                try {
+                  if (videoRef.current.paused) {
+                    await videoRef.current.play();
+                    console.log('✅ Video playing after click');
+                    setShowPlayButton(false);
+                  }
+                } catch (err) {
+                  console.error('Click play failed:', err);
+                }
+              }
+            }}
+            onError={(e) => {
+              console.error('Video error:', e.target.error);
+              if (e.target.error) {
+                console.error('Error code:', e.target.error.code);
+                console.error('Error message:', e.target.error.message);
+              }
+              setShowPlayButton(true);
+            }}
+            onLoadedData={() => {
+              console.log('✅ Video loaded successfully');
+              if (videoRef.current) {
+                videoRef.current.play()
+                  .then(() => setShowPlayButton(false))
+                  .catch(err => {
+                    console.warn('Play on loaded data failed:', err.message);
+                    setShowPlayButton(true);
+                  });
+              }
+            }}
+            onLoadedMetadata={() => {
+              console.log('✅ Video metadata loaded');
+              if (videoRef.current) {
+                videoRef.current.play()
+                  .then(() => setShowPlayButton(false))
+                  .catch(err => console.warn('Play on metadata load failed:', err.message));
+              }
+            }}
+            onCanPlay={() => {
+              console.log('✅ Video can play');
+              if (videoRef.current && videoRef.current.paused) {
+                videoRef.current.play()
+                  .then(() => setShowPlayButton(false))
+                  .catch(err => {
+                    console.warn('Play on can play failed:', err.message);
+                    setShowPlayButton(true);
+                  });
+              }
+            }}
+          />
+          
+          {/* Custom Play Button Overlay */}
+          {showPlayButton && (
+            <div 
+              className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg cursor-pointer"
+              onClick={async () => {
+                if (videoRef.current) {
+                  try {
+                    await videoRef.current.play();
+                    console.log('✅ Video playing from overlay button');
+                    setShowPlayButton(false);
+                  } catch (err) {
+                    console.error('Overlay play failed:', err);
+                  }
+                }
+              }}
+            >
+              <div className="bg-red-500/90 hover:bg-red-600 rounded-full p-6 transition-all duration-300 transform hover:scale-110">
+                <svg 
+                  className="w-12 h-12 text-white" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Content */}

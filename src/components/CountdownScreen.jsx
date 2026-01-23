@@ -127,18 +127,18 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
             {screenConfig.message}
           </p>
           
-          <div className="grid grid-cols-4 gap-4 md:gap-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-4 gap-2 md:gap-8 max-w-2xl mx-auto">
             {[
               { value: countdown.days, label: 'Days' },
               { value: countdown.hours, label: 'Hours' },
               { value: countdown.minutes, label: 'Minutes' },
               { value: countdown.seconds, label: 'Seconds' }
             ].map((item, index) => (
-              <div key={index} className="bg-black/5 backdrop-blur-sm border-2 border-red-500/30 rounded-lg p-4 md:p-6">
-                <div className="text-3xl md:text-5xl font-bold text-black mb-2">
+              <div key={index} className="bg-black/5 backdrop-blur-sm border-2 border-red-500/30 rounded-lg p-2 md:p-6">
+                <div className="text-2xl md:text-5xl font-bold text-black mb-1 md:mb-2">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-[10px] md:text-xs text-black/60 uppercase tracking-wider">
+                <div className="text-[8px] md:text-xs text-black/60 uppercase tracking-tight md:tracking-wider leading-tight">
                   {item.label}
                 </div>
               </div>

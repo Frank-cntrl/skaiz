@@ -2,6 +2,9 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import CountdownScreen from './components/CountdownScreen'
 
+// Reveal date - change this to control when the site becomes visible
+const REVEAL_DATE = new Date('2026-02-17T00:00:00')
+
 // Lazy load all main site components to prevent code access
 const Navbar = lazy(() => import('./components/Navbar.jsx'))
 const Home = lazy(() => import('./pages/Home.jsx'))
@@ -18,56 +21,25 @@ const LoadingScreen = () => (
 )
 
 function App() {
-  const [countdownStatus, setCountdownStatus] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isRevealed, setIsRevealed] = useState(false)
 
   useEffect(() => {
-    // Fetch countdown status from backend
-    const checkCountdown = async () => {
-      try {
-        const apiUrl = import.meta.env.VITE_API_URL || 
-          (import.meta.env.DEV 
-            ? 'http://localhost:8080/api/countdown'
-            : '/api/countdown')
-        
-        const response = await fetch(apiUrl)
-        const data = await response.json()
-        setCountdownStatus(data)
-      } catch (error) {
-        console.error('Failed to fetch countdown status:', error)
-        // On error, default to showing countdown
-        setCountdownStatus({
-          isRevealed: false,
-          revealDate: null,
-          timeRemaining: 0
-        })
-      } finally {
-        setIsLoading(false)
-      }
+    // Check if reveal date has passed
+    const checkReveal = () => {
+      const now = new Date()
+      setIsRevealed(now >= REVEAL_DATE)
     }
 
-    checkCountdown()
-    // Check for countdown updates (interval from backend config or default 60s)
-    const refreshInterval = countdownStatus?.config?.refreshInterval || 60000
-    const interval = setInterval(checkCountdown, refreshInterval)
+    checkReveal()
+    // Check every second to handle the moment of reveal
+    const interval = setInterval(checkReveal, 1000)
     
     return () => clearInterval(interval)
   }, [])
 
-  // Show loading state
-  if (isLoading) {
-    return <LoadingScreen />
-  }
-
   // Show countdown screen if not revealed
-  if (!countdownStatus?.isRevealed) {
-    return (
-      <CountdownScreen 
-        revealDate={countdownStatus?.revealDate}
-        timeRemaining={countdownStatus?.timeRemaining || 0}
-        config={countdownStatus?.config}
-      />
-    )
+  if (!isRevealed) {
+    return <CountdownScreen revealDate={REVEAL_DATE} />
   }
 
   // Show main site after reveal

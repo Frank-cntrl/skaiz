@@ -1,23 +1,21 @@
 import { useState, useEffect } from 'react';
 
-const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
+// Configuration for the countdown screen
+const SCREEN_CONFIG = {
+  title: 'SKAIZ',
+  subtitle: 'WORLD',
+  message: 'Coming Soon',
+  instagramUrl: 'https://www.instagram.com/iamskaiz/',
+  backgroundImage: '/skaiz-world.png',
+};
+
+const CountdownScreen = ({ revealDate }) => {
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
-
-  // Use backend config or fallback to defaults
-  const screenConfig = config.screen || {
-    title: 'SKAIZ',
-    subtitle: 'WORLD',
-    message: 'Coming Soon',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/flyskaiz/',
-    },
-    backgroundImage: '/skaiz-world.png',
-  };
 
   useEffect(() => {
     const calculateCountdown = () => {
@@ -45,8 +43,8 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
       {/* Logo Image - Original Size */}
       <div className="relative z-10 -mb-32 md:-mb-40 lg:-mb-48">
         <img
-          src={screenConfig.backgroundImage}
-          alt={`${screenConfig.title} ${screenConfig.subtitle}`}
+          src={SCREEN_CONFIG.backgroundImage}
+          alt={`${SCREEN_CONFIG.title} ${SCREEN_CONFIG.subtitle}`}
           className="w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[576px] lg:h-[576px] object-contain mx-auto -mt-32"
         />
       </div>
@@ -81,7 +79,7 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
         {/* Countdown Timer */}
         <div className="mb-8">
           <p className="text-black/80 text-sm md:text-base uppercase tracking-widest mb-8">
-            {screenConfig.message}
+            {SCREEN_CONFIG.message}
           </p>
           
           <div className="grid grid-cols-4 gap-2 md:gap-8 max-w-2xl mx-auto">
@@ -104,18 +102,16 @@ const CountdownScreen = ({ revealDate, timeRemaining, config = {} }) => {
         </div>
 
         {/* Social Links */}
-        {screenConfig.socialLinks?.instagram && (
-          <div className="mt-16 mb-12">
-            <a 
-              href={screenConfig.socialLinks.instagram}
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-black/70 hover:text-red-500 text-sm tracking-widest transition-colors duration-300 uppercase"
-            >
-              Follow on Instagram →
-            </a>
-          </div>
-        )}
+        <div className="mt-16 mb-12">
+          <a 
+            href={SCREEN_CONFIG.instagramUrl}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-black/70 hover:text-red-500 text-sm tracking-widest transition-colors duration-300 uppercase"
+          >
+            Follow on Instagram →
+          </a>
+        </div>
       </div>
 
       {/* Animated Particles/Stars Effect (Optional) */}

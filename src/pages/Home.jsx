@@ -12,7 +12,7 @@ const Home = () => {
           contact
         </Link>
         <a 
-          href="https://www.instagram.com/flyskaiz/" 
+          href="https://www.instagram.com/iamskaiz/" 
           target="_blank" 
           rel="noopener noreferrer"
           className="text-black text-sm tracking-wider hover:opacity-70 transition-opacity duration-300"

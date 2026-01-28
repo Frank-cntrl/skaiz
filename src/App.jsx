@@ -1,11 +1,7 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import CountdownScreen from './components/CountdownScreen'
 
-// Reveal date - change this to control when the site becomes visible
-const REVEAL_DATE = new Date('2026-02-17T00:00:00')
-
-// Lazy load all main site components to prevent code access
+// Lazy load all main site components
 const Navbar = lazy(() => import('./components/Navbar.jsx'))
 const Home = lazy(() => import('./pages/Home.jsx'))
 const Video = lazy(() => import('./pages/Video.jsx'))
@@ -21,28 +17,6 @@ const LoadingScreen = () => (
 )
 
 function App() {
-  const [isRevealed, setIsRevealed] = useState(false)
-
-  useEffect(() => {
-    // Check if reveal date has passed
-    const checkReveal = () => {
-      const now = new Date()
-      setIsRevealed(now >= REVEAL_DATE)
-    }
-
-    checkReveal()
-    // Check every second to handle the moment of reveal
-    const interval = setInterval(checkReveal, 1000)
-    
-    return () => clearInterval(interval)
-  }, [])
-
-  // Show countdown screen if not revealed
-  if (!isRevealed) {
-    return <CountdownScreen revealDate={REVEAL_DATE} />
-  }
-
-  // Show main site after reveal
   return (
     <Router>
       <Suspense fallback={<LoadingScreen />}>

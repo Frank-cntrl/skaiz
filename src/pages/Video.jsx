@@ -35,8 +35,17 @@ const Video = () => {
   return (
     <div className="min-h-screen bg-white text-black pt-20">
 
+      {/* Page Header */}
+      <div className="max-w-7xl mx-auto px-8 py-12">
+        <img 
+          src="/video_document.png" 
+          alt="Video" 
+          className="h-16 md:h-24 w-auto object-contain mb-12"
+        />
+      </div>
+
       {/* Video Stack */}
-      <div className="max-w-4xl mx-auto px-8 pb-24 pt-12">
+      <div className="max-w-4xl mx-auto px-8 pb-24">
         <div className="space-y-16">
           {videos.map((video, index) => (
             <div key={video.id} className="group">

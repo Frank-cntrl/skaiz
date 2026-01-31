@@ -7,10 +7,12 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/video', label: 'Video' },
     { path: '/editorial', label: 'Editorial' },
-    { path: '/documentary', label: 'Documentary' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/art', label: 'Art' },
+    { path: '/light', label: 'Light' },
+    { path: '/memories', label: 'Memories' },
+    { path: '/video', label: 'Video' },
+    { path: '/world', label: 'World' },
   ]
 
   const isActive = (path) => location.pathname === path

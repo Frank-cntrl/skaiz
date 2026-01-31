@@ -122,27 +122,41 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Top Navigation - Contact and Instagram */}
-      <div className="fixed top-4 right-6 flex items-center space-x-6 z-50">
-        <div className="w-2 h-2 rounded-full"></div>
-        <a 
-          href="mailto:contact@skaiz.world"
-          className="text-black text-sm tracking-wider hover:opacity-70 transition-opacity duration-300"
-        >
-          contact
-        </a>
-        <a 
-          href="https://www.instagram.com/iamskaiz/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-black text-sm tracking-wider hover:opacity-70 transition-opacity duration-300"
-        >
-          instagram
-        </a>
-      </div>
+      {/* Fixed Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white py-3">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-center relative">
+          {/* Favicon Logo - Centered */}
+          <img 
+            src="/favicon.png" 
+            alt="Skaiz" 
+            className="h-8 w-auto object-contain"
+          />
+          
+          {/* Contact and Instagram - Absolute right */}
+          <div className="absolute right-6 flex items-center space-x-6">
+            <a 
+              href="mailto:contact@skaiz.world"
+              className="text-black text-sm tracking-wider hover:opacity-70 transition-opacity duration-300"
+            >
+              contact
+            </a>
+            <a 
+              href="https://www.instagram.com/iamskaiz/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-black text-sm tracking-wider hover:opacity-70 transition-opacity duration-300"
+            >
+              instagram
+            </a>
+          </div>
+        </div>
+      </nav>
 
-      {/* Logo */}
-      <div className="w-full flex justify-center pt-8 pb-4">
+      {/* Spacer for fixed navbar */}
+      <div className="h-16"></div>
+
+      {/* Logo on page */}
+      <div className="w-full flex justify-center py-8">
         <img 
           src="/SkaizWorld_document.png" 
           alt="Skaiz World" 
@@ -179,7 +193,7 @@ const Landing = () => {
                   <h2 className="text-2xl font-serif tracking-wider">{section.label}</h2>
                 )}
               </div>
-              <div className="border-4 border-red-500 aspect-[4/3] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 {section.images.length > 0 ? (
                   <ImageCycler images={section.images} interval={150} />
                 ) : (

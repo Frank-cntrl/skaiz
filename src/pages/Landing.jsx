@@ -70,26 +70,31 @@ const Landing = () => {
     {
       path: '/editorial',
       label: 'editorial',
+      headerImage: '/editorial_document.png',
       images: Array.from({ length: 8 }, (_, i) => `/editorial/SKAIZ.WORLD-${i + 1}.jpg`)
     },
     {
       path: '/memories',
       label: 'memories',
+      headerImage: '/Memories_Document.png',
       images: Array.from({ length: 8 }, (_, i) => `/Memories/SKAIZ.WORLD_film-${i + 1}.jpg`)
     },
     {
       path: '/light',
       label: 'light',
+      headerImage: null, // No header image yet
       images: [] // No images yet
     },
     {
       path: '/video',
       label: 'video',
+      headerImage: '/video_document.png',
       images: [] // Video thumbnails could go here
     },
     {
       path: '/world',
       label: 'world',
+      headerImage: '/world_document.png',
       images: [
         '/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-1.jpg',
         '/world/Madiera 2025/Madiera2025-1.jpg',
@@ -104,6 +109,7 @@ const Landing = () => {
     {
       path: '/art',
       label: 'art',
+      headerImage: null, // No header image yet
       images: [
         '/art/SKAIZ.WORLD_ART01.png',
         '/art/SKAIZ.WORLD_ART02.png',
@@ -162,8 +168,16 @@ const Landing = () => {
               to={section.path}
               className="group"
             >
-              <div className="text-center mb-4">
-                <h2 className="text-2xl font-serif tracking-wider">{section.label}</h2>
+              <div className="text-center mb-4 h-10 flex items-center justify-center">
+                {section.headerImage ? (
+                  <img 
+                    src={section.headerImage} 
+                    alt={section.label} 
+                    className="h-8 md:h-10 w-auto object-contain"
+                  />
+                ) : (
+                  <h2 className="text-2xl font-serif tracking-wider">{section.label}</h2>
+                )}
               </div>
               <div className="border-4 border-red-500 aspect-[4/3] overflow-hidden relative">
                 {section.images.length > 0 ? (

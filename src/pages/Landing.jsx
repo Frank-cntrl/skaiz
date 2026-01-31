@@ -3,24 +3,63 @@ import { Link } from 'react-router-dom'
 
 const ImageCycler = ({ images, interval = 150 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
 
+  // Preload all images before cycling starts
   useEffect(() => {
-    if (images.length <= 1) return
+    if (images.length === 0) return
+
+    let loadedCount = 0
+    const imageElements = images.map((src) => {
+      const img = new Image()
+      img.src = src
+      img.onload = () => {
+        loadedCount++
+        if (loadedCount === images.length) {
+          setImagesLoaded(true)
+        }
+      }
+      img.onerror = () => {
+        loadedCount++
+        if (loadedCount === images.length) {
+          setImagesLoaded(true)
+        }
+      }
+      return img
+    })
+
+    return () => {
+      imageElements.forEach((img) => {
+        img.onload = null
+        img.onerror = null
+      })
+    }
+  }, [images])
+
+  // Only start cycling once images are loaded
+  useEffect(() => {
+    if (!imagesLoaded || images.length <= 1) return
     
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length)
     }, interval)
 
     return () => clearInterval(timer)
-  }, [images.length, interval])
+  }, [images.length, interval, imagesLoaded])
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
-      <img
-        src={images[currentIndex]}
-        alt=""
-        className="w-full h-full object-cover"
-      />
+    <div className="relative w-full h-full overflow-hidden bg-gray-100">
+      {imagesLoaded ? (
+        <img
+          src={images[currentIndex]}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="w-6 h-6 border-2 border-gray-300 border-t-black rounded-full animate-spin" />
+        </div>
+      )}
     </div>
   )
 }

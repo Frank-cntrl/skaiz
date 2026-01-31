@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-// Image cycling component for each section - fast, no transitions
-const ImageCycler = ({ images, interval = 300 }) => {
+const ImageCycler = ({ images, interval = 150 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
@@ -129,7 +128,7 @@ const Landing = () => {
               </div>
               <div className="border-4 border-red-500 aspect-[4/3] overflow-hidden relative">
                 {section.images.length > 0 ? (
-                  <ImageCycler images={section.images} interval={300} />
+                  <ImageCycler images={section.images} interval={150} />
                 ) : (
                   <div className="w-full h-full bg-gray-100 flex items-center justify-center">
                     <span className="text-gray-400 text-sm">Coming soon</span>

@@ -58,7 +58,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile  */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-64 mt-6' : 'max-h-0'}`}>
           <div className="flex flex-col space-y-4 py-4 border-t border-gray-200">
             {navLinks.map((link) => (

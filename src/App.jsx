@@ -42,8 +42,10 @@ function App() {
     return () => clearTimeout(timeout)
   }, [isRevealed])
 
-  // Check if current URL starts with the secret path
-  const isSecretAccess = window.location.pathname.startsWith(SECRET_PATH)
+  // Check if secret path — also check the redirect param from 404.html
+  const redirectParam = new URLSearchParams(window.location.search).get('redirect')
+  const currentPath = redirectParam ? decodeURIComponent(redirectParam) : window.location.pathname
+  const isSecretAccess = currentPath.startsWith(SECRET_PATH)
 
   if (!isRevealed && !isSecretAccess) {
     return <CountdownScreen revealDate={REVEAL_DATE} />

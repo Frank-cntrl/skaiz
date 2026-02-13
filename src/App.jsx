@@ -22,14 +22,24 @@ const LoadingScreen = () => (
   </div>
 )
 
-// Secret path that bypasses the countdown
-const SECRET_PATH = '/super-secret-view-for-kaiya-and-frank-only'
+// Secret hash that bypasses the countdown — visit skaiz.world/#kaiya-and-frank
+const SECRET_HASH = '#kaiya-and-frank'
 
 function App() {
-  const [isRevealed, setIsRevealed] = useState(Date.now() >= REVEAL_DATE.getTime())
+  const [isRevealed, setIsRevealed] = useState(
+    Date.now() >= REVEAL_DATE.getTime() || window.location.hash === SECRET_HASH
+  )
 
   useEffect(() => {
     if (isRevealed) return
+
+    // Listen for hash changes (in case they add the hash after page load)
+    const checkHash = () => {
+      if (window.location.hash === SECRET_HASH) {
+        setIsRevealed(true)
+      }
+    }
+    window.addEventListener('hashchange', checkHash)
 
     const msUntilReveal = REVEAL_DATE.getTime() - Date.now()
 
@@ -39,15 +49,13 @@ function App() {
     }
 
     const timeout = setTimeout(() => setIsRevealed(true), msUntilReveal)
-    return () => clearTimeout(timeout)
+    return () => {
+      clearTimeout(timeout)
+      window.removeEventListener('hashchange', checkHash)
+    }
   }, [isRevealed])
 
-  // Check if secret path — also check the redirect param from 404.html
-  const redirectParam = new URLSearchParams(window.location.search).get('redirect')
-  const currentPath = redirectParam ? decodeURIComponent(redirectParam) : window.location.pathname
-  const isSecretAccess = currentPath.startsWith(SECRET_PATH)
-
-  if (!isRevealed && !isSecretAccess) {
+  if (!isRevealed) {
     return <CountdownScreen revealDate={REVEAL_DATE} />
   }
 
@@ -57,8 +65,6 @@ function App() {
         <div className="min-h-screen bg-white">
           <Navbar />
           <Routes>
-            {/* Secret entry point — renders the landing page */}
-            <Route path={SECRET_PATH} element={<Landing />} />
             <Route path="/" element={<Landing />} />
             <Route path="/editorial" element={<Editorial />} />
             <Route path="/art" element={<Art />} />

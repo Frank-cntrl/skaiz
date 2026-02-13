@@ -2,58 +2,64 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import CountdownScreen from './components/CountdownScreen'
 
-// Reveal date - change this to control when the site becomes visible
+// Reveal date — site goes live automatically when this moment passes
 const REVEAL_DATE = new Date('2026-02-17T00:00:00')
 
-// Lazy load all main site components to prevent code access
+// Lazy load all page components
 const Navbar = lazy(() => import('./components/Navbar.jsx'))
-const Home = lazy(() => import('./pages/Home.jsx'))
-const Video = lazy(() => import('./pages/Video.jsx'))
+const Landing = lazy(() => import('./pages/Landing.jsx'))
 const Editorial = lazy(() => import('./pages/Editorial.jsx'))
-const Documentary = lazy(() => import('./pages/Documentary.jsx'))
-const Contact = lazy(() => import('./pages/Contact.jsx'))
+const Art = lazy(() => import('./pages/Art.jsx'))
+const Light = lazy(() => import('./pages/Light.jsx'))
+const Memories = lazy(() => import('./pages/Memories.jsx'))
+const Video = lazy(() => import('./pages/Video.jsx'))
+const World = lazy(() => import('./pages/World.jsx'))
 
 // Loading fallback component
 const LoadingScreen = () => (
-  <div className="min-h-screen bg-black flex items-center justify-center">
-    <div className="text-white text-2xl font-serif">Loading...</div>
+  <div className="min-h-screen bg-white flex items-center justify-center">
+    <div className="text-black text-2xl font-serif">Loading...</div>
   </div>
 )
 
 function App() {
-  const [isRevealed, setIsRevealed] = useState(false)
+  const [isRevealed, setIsRevealed] = useState(Date.now() >= REVEAL_DATE.getTime())
 
   useEffect(() => {
-    // Check if reveal date has passed
-    const checkReveal = () => {
-      const now = new Date()
-      setIsRevealed(now >= REVEAL_DATE)
+    if (isRevealed) return
+
+    // Calculate ms remaining until reveal
+    const msUntilReveal = REVEAL_DATE.getTime() - Date.now()
+
+    if (msUntilReveal <= 0) {
+      setIsRevealed(true)
+      return
     }
 
-    checkReveal()
-    // Check every second to handle the moment of reveal
-    const interval = setInterval(checkReveal, 1000)
-    
-    return () => clearInterval(interval)
-  }, [])
+    // Auto-switch to the full site the instant the countdown hits zero
+    const timeout = setTimeout(() => setIsRevealed(true), msUntilReveal)
+    return () => clearTimeout(timeout)
+  }, [isRevealed])
 
-  // Show countdown screen if not revealed
+  // Show countdown screen until reveal date
   if (!isRevealed) {
     return <CountdownScreen revealDate={REVEAL_DATE} />
   }
 
-  // Show main site after reveal
+  // Full site after reveal
   return (
     <Router>
       <Suspense fallback={<LoadingScreen />}>
         <div className="min-h-screen bg-white">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/video" element={<Video />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/editorial" element={<Editorial />} />
-            <Route path="/documentary" element={<Documentary />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/art" element={<Art />} />
+            <Route path="/light" element={<Light />} />
+            <Route path="/memories" element={<Memories />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/world" element={<World />} />
           </Routes>
         </div>
       </Suspense>

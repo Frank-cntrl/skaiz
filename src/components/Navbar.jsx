@@ -7,10 +7,12 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/video', label: 'Video' },
     { path: '/editorial', label: 'Editorial' },
-    { path: '/documentary', label: 'Documentary' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/art', label: 'Art' },
+    { path: '/light', label: 'Light' },
+    { path: '/memories', label: 'Memories' },
+    { path: '/video', label: 'Video' },
+    { path: '/world', label: 'World' },
   ]
 
   const isActive = (path) => location.pathname === path
@@ -26,8 +28,12 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           
           {/* Logo */}
-          <Link to="/" className="font-serif text-2xl tracking-wider text-black hover:text-gray-600 transition-colors duration-300">
-            SKAIZ
+          <Link to="/" className="hover:opacity-70 transition-opacity duration-300">
+            <img 
+              src="/SkaizWorld_document.png" 
+              alt="Skaiz World" 
+              className="h-8 w-auto object-contain justify-center"
+            />
           </Link>
 
           {/* Desktop Navigation */}

@@ -22,13 +22,15 @@ const LoadingScreen = () => (
   </div>
 )
 
+// Secret path that bypasses the countdown
+const SECRET_PATH = '/super-secret-view-for-kaiya-and-frank-only'
+
 function App() {
   const [isRevealed, setIsRevealed] = useState(Date.now() >= REVEAL_DATE.getTime())
 
   useEffect(() => {
     if (isRevealed) return
 
-    // Calculate ms remaining until reveal
     const msUntilReveal = REVEAL_DATE.getTime() - Date.now()
 
     if (msUntilReveal <= 0) {
@@ -36,23 +38,25 @@ function App() {
       return
     }
 
-    // Auto-switch to the full site the instant the countdown hits zero
     const timeout = setTimeout(() => setIsRevealed(true), msUntilReveal)
     return () => clearTimeout(timeout)
   }, [isRevealed])
 
-  // Show countdown screen until reveal date
-  if (!isRevealed) {
+  // Check if current URL starts with the secret path
+  const isSecretAccess = window.location.pathname.startsWith(SECRET_PATH)
+
+  if (!isRevealed && !isSecretAccess) {
     return <CountdownScreen revealDate={REVEAL_DATE} />
   }
 
-  // Full site after reveal
   return (
     <Router>
       <Suspense fallback={<LoadingScreen />}>
         <div className="min-h-screen bg-white">
           <Navbar />
           <Routes>
+            {/* Secret entry point — renders the landing page */}
+            <Route path={SECRET_PATH} element={<Landing />} />
             <Route path="/" element={<Landing />} />
             <Route path="/editorial" element={<Editorial />} />
             <Route path="/art" element={<Art />} />

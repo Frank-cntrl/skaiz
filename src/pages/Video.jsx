@@ -2,33 +2,36 @@ const Video = () => {
   const videos = [
     {
       id: 1,
-      title: '"DANGEROUS! music video by DEY-G, Adol, Syrosis',
-      youtubeUrl: 'https://youtube.com/watch?v=example1',
-      thumbnail: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+      title: '"Dangerous!"',
+      artist: 'DEY G ft. Adol & Syrosis',
+      credit: 'Directed, Shot, and Lit by Skaiz',
+      youtubeUrl: 'https://www.youtube.com/watch?v=7oQy7tEP88s',
+      thumbnail: 'https://img.youtube.com/vi/7oQy7tEP88s/maxresdefault.jpg',
     },
     {
       id: 2,
-      title: '"Beyond the Veild" Visualizer for Ajai Kasim',
-      youtubeUrl: 'https://youtube.com/watch?v=example2',
-      thumbnail: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80',
+      title: '"Beyond the Veil"',
+      artist: 'Ajai Kasim',
+      credit: 'Directed, Shot, and Lit by Skaiz',
+      youtubeUrl: 'https://www.youtube.com/watch?v=ExTzx3l4fKg',
+      thumbnail: 'https://img.youtube.com/vi/ExTzx3l4fKg/sddefault.jpg',
     },
     {
       id: 3,
-      title: 'Music Video - "Neon Dreams"',
-      youtubeUrl: 'https://youtube.com/watch?v=example3',
-      thumbnail: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80',
+      title: '"Girl You Got Cash?"',
+      artist: 'Omighty',
+      credit: 'Directed, Shot, and Lit by Skaiz',
+      youtubeUrl: null,
+      thumbnail: null,
+      localVideo: '/video/Girlyougotcash_.MP4',
     },
     {
       id: 4,
-      title: 'Brand Campaign - "Future Forward"',
-      youtubeUrl: 'https://youtube.com/watch?v=example4',
-      thumbnail: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-    },
-    {
-      id: 5,
-      title: 'Short Film - "Midnight Stories"',
-      youtubeUrl: 'https://youtube.com/watch?v=example5',
-      thumbnail: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80',
+      title: '"EYE 2 EYE"',
+      artist: 'DEY-G',
+      credit: 'Directed, Shot, and Lit by Skaiz',
+      youtubeUrl: 'https://www.youtube.com/watch?v=GG71YhiWVKc',
+      thumbnail: 'https://img.youtube.com/vi/GG71YhiWVKc/maxresdefault.jpg',
     },
   ]
 
@@ -47,56 +50,45 @@ const Video = () => {
       {/* Video Stack */}
       <div className="max-w-4xl mx-auto px-8 pb-24">
         <div className="space-y-16">
-          {videos.map((video, index) => (
+          {videos.map((video) => (
             <div key={video.id} className="group">
-              {/* Video Title */}
-              <h2 className="text-xl font-serif text-center mb-6 tracking-wide">
-                {video.title}
-              </h2>
+              {/* Video Title & Credits */}
+              <div className="text-center mb-6">
+                <h2 className="text-xl font-serif tracking-wide">
+                  {video.title}
+                </h2>
+                <p className="text-sm text-black/60 mt-1">{video.artist}</p>
+                <p className="text-xs text-black/40 mt-1 tracking-wider uppercase">{video.credit}</p>
+              </div>
               
-              {/* Video Container with Red Border */}
-              <div className="border-4 border-red-500 relative overflow-hidden aspect-video">
-                <a 
-                  href={video.youtubeUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block w-full h-full relative group-hover:scale-105 transition-transform duration-500"
-                >
-                  {/* Video Thumbnail */}
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover"
+              {/* Video Container */}
+              {video.localVideo ? (
+                <div className="relative overflow-hidden aspect-video bg-black">
+                  <video
+                    src={video.localVideo}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-contain"
                   />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
-                  
-                  {/* Play Button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 bg-red-500/80 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-red-600/80 transition-colors duration-300">
-                      <div className="w-0 h-0 border-t-12 border-t-transparent border-l-20 border-l-white border-b-12 border-b-transparent ml-2"></div>
-                    </div>
-                  </div>
-                  
-                  {/* YouTube Link Indicator */}
-                  <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 text-xs tracking-wider rounded">
-                    WATCH FULL VIDEO
-                  </div>
-                </a>
-              </div>
-              
-              {/* Video Description/Link */}
-              <div className="text-center mt-4">
-                <a 
-                  href={video.youtubeUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-red-500 hover:text-red-700 text-sm tracking-wider transition-colors duration-300"
-                >
-                  → View on YouTube
-                </a>
-              </div>
+                </div>
+              ) : (
+                <div className="relative overflow-hidden aspect-video">
+                  <a 
+                    href={video.youtubeUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block w-full h-full relative group-hover:scale-105 transition-transform duration-500"
+                  >
+                    <img
+                      src={video.thumbnail}
+                      alt={video.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -30,23 +30,36 @@ const Art = () => {
 
   return (
     <div className="min-h-screen bg-white text-black pt-20">
-      {/* Image Gallery */}
+      {/* Image Gallery — scattered collage */}
       <div className="max-w-7xl mx-auto px-8 py-12 pb-24">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {artImages.map((image) => (
-            <div
-              key={image.id}
-              className="group cursor-pointer overflow-hidden"
-              onClick={() => setSelectedImage(image)}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-          ))}
+        <div className="flex flex-wrap items-start">
+          {artImages.map((image, index) => {
+            // Use index for more variation with small image sets
+            const rand = (i, seed) => ((i * 7 + seed * 13 + 3) % 11) / 10
+            const w = 30 + Math.round(rand(index, 1) * 18)         // 30% to 48%
+            const mt = -8 + Math.round(rand(index, 2) * 30)        // -8px to 22px
+            const ml = Math.round(rand(index, 3) * 5)              // 0% to 5%
+            return (
+              <div
+                key={image.id}
+                className="cursor-pointer overflow-hidden"
+                style={{
+                  width: `${w}%`,
+                  marginTop: `${mt}px`,
+                  marginLeft: `${ml}%`,
+                  marginBottom: '10px',
+                }}
+                onClick={() => setSelectedImage(image)}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  className="w-full h-auto transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
 

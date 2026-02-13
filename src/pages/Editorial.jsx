@@ -31,20 +31,29 @@ const Editorial = () => {
         />
       </div>
 
-      {/* Image Gallery */}
+      {/* Cover Image */}
+      <div className="w-full flex justify-center px-8 mb-16">
+        <img 
+          src="/SKAIZ.WORLD_COVERPAGE.jpg" 
+          alt="Skaiz World Editorial Cover" 
+          className="w-full max-w-4xl h-auto object-cover"
+        />
+      </div>
+
+      {/* Image Gallery — masonry layout */}
       <div className="max-w-7xl mx-auto px-8 pb-24">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="columns-1 md:columns-2 gap-4">
           {editorialImages.map((image) => (
             <div
               key={image.id}
-              className="group cursor-pointer overflow-hidden"
+              className="group cursor-pointer overflow-hidden mb-4 break-inside-avoid"
               onClick={() => setSelectedImage(image)}
             >
               <img
                 src={image.src}
                 alt={image.alt}
                 loading="lazy"
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
               />
             </div>
           ))}

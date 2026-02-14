@@ -189,11 +189,11 @@ const Landing = () => {
 
       {/* Scattered Layout — Desktop */}
       <div className="hidden md:block max-w-6xl mx-auto px-8 pb-24">
-        <SectionBlock section={sections.editorial} className="w-[40%] ml-[5%] mb-6" />
-        <SectionBlock section={sections.memories} className="w-[25%] ml-[58%] -mt-8 mb-10" />
-        <SectionBlock section={sections.world} className="w-[30%] ml-[18%] mb-6" />
-        <SectionBlock section={sections.video} className="w-[32%] ml-[52%] -mt-16 mb-10" />
-        <SectionBlock section={sections.art} className="w-[35%] ml-[3%] mb-6" />
+        <SectionBlock section={sections.editorial} className="w-[60%] ml-[5%] mb-6" />
+        <SectionBlock section={sections.memories} className="w-[50%] ml-[calc(58%+10px)] -mt-8 mb-10" />
+        <SectionBlock section={sections.world} className="w-[45%] ml-[5%] mb-6" />
+        <SectionBlock section={sections.video} className="w-[48%] ml-[52%] -mt-16 mb-10" />
+        <SectionBlock section={sections.art} className="w-[53%] ml-[3%] mb-6" />
         <SectionBlock section={sections.light} className="w-[33%] ml-[52%] -mt-6" />
       </div>
 

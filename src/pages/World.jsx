@@ -143,46 +143,79 @@ const World = () => {
         />
       </div>
 
-      {/* Two-column layout: Paris + San Sebastian (left) | Puerto Rico + Madeira (right) */}
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 mb-24">
-
-          {/* Left column: Paris → San Sebastian */}
-          <div className="flex-1 space-y-16">
-            {/* Paris */}
-            <div>
-              <SectionHeader section={paris} />
-              <StaggeredGallery images={paris.images} onSelect={setSelectedImage} />
-            </div>
-
-            {/* San Sebastian / Dyptychs — larger images */}
-            <div>
-              <SectionHeader section={dyptychs} />
-              <StaggeredGallery images={dyptychs.images} large onSelect={setSelectedImage} />
-            </div>
-          </div>
-
-          {/* Right column: Puerto Rico → Madeira */}
-          <div className="flex-1 space-y-16 md:mt-12">
-            {/* Puerto Rico */}
-            <div>
-              <SectionHeader section={puertoRico} />
-              <StaggeredGallery images={puertoRico.images} onSelect={setSelectedImage} />
-            </div>
-
-            {/* Madeira */}
-            <div>
-              <SectionHeader section={madeira} />
-              <StaggeredGallery images={madeira.images} onSelect={setSelectedImage} />
-            </div>
-          </div>
+      {/* ── Mobile layout — simple stack ── */}
+      <div className="md:hidden px-8 space-y-16 pb-24">
+        <div>
+          <SectionHeader section={paris} />
+          <StaggeredGallery images={paris.images} onSelect={setSelectedImage} />
         </div>
-
-        {/* Aventuras — full width across both columns */}
-        <div className="pb-24">
+        <div>
+          <SectionHeader section={puertoRico} />
+          <StaggeredGallery images={puertoRico.images} onSelect={setSelectedImage} />
+        </div>
+        <div>
+          <SectionHeader section={dyptychs} />
+          <StaggeredGallery images={dyptychs.images} large onSelect={setSelectedImage} />
+        </div>
+        <div>
+          <SectionHeader section={madeira} />
+          <StaggeredGallery images={madeira.images} onSelect={setSelectedImage} />
+        </div>
+        <div>
           <SectionHeader section={aventuras} />
           <StaggeredGallery images={aventuras.images} onSelect={setSelectedImage} />
         </div>
+      </div>
+
+      {/* ── Desktop layout — float-based L-shape for Aventuras ── */}
+      <div className="hidden md:block max-w-7xl mx-auto px-8 pb-24">
+
+        {/* Right column — floated so Aventuras can flow around it */}
+        <div className="float-right w-[47%] mt-12 space-y-16">
+          <div>
+            <SectionHeader section={puertoRico} />
+            <StaggeredGallery images={puertoRico.images} onSelect={setSelectedImage} />
+          </div>
+          <div>
+            <SectionHeader section={madeira} />
+            <StaggeredGallery images={madeira.images} onSelect={setSelectedImage} />
+          </div>
+          {/* Divider at bottom of right column */}
+          <div className="h-px bg-black/10 w-full" />
+        </div>
+
+        {/* Left column — Paris + Dyptychs */}
+        <div className="w-[47%] space-y-16">
+          <div>
+            <SectionHeader section={paris} />
+            <StaggeredGallery images={paris.images} onSelect={setSelectedImage} />
+          </div>
+          <div>
+            <SectionHeader section={dyptychs} />
+            <StaggeredGallery images={dyptychs.images} large onSelect={setSelectedImage} />
+          </div>
+        </div>
+
+        {/* Aventuras — L-shape: inline-block images flow in left column while
+            the right float is active, then expand to full width once it clears */}
+        <div className="mt-16">
+          <SectionHeader section={aventuras} />
+          <div>
+            {aventuras.images.map((image) => (
+              <LazyImage
+                key={image.id}
+                src={image.src}
+                alt={image.alt}
+                className="inline-block align-top cursor-pointer"
+                imgClassName="transition-transform duration-500 hover:scale-105"
+                style={collageStyle(image.id)}
+                onClick={() => setSelectedImage(image)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="clear-both" />
       </div>
 
       {/* Lightbox Modal */}

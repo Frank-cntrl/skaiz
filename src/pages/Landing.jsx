@@ -76,7 +76,9 @@ const SectionBlock = ({ section, className = '' }) => (
       )}
     </div>
     <div className="overflow-hidden relative aspect-4/3">
-      {section.images.length > 0 ? (
+      {section.gif ? (
+        <img src={section.gif} alt={section.label} className="w-full h-full object-cover" />
+      ) : section.images.length > 0 ? (
         <ImageCycler images={section.images} interval={180} />
       ) : (
         <div className="w-full h-full bg-white flex items-center justify-center">
@@ -120,11 +122,8 @@ const Landing = () => {
       path: '/video',
       label: 'video',
       headerImage: '/video_document.png',
-      images: [
-        'https://img.youtube.com/vi/7oQy7tEP88s/maxresdefault.jpg',
-        'https://img.youtube.com/vi/GG71YhiWVKc/maxresdefault.jpg',
-        'https://img.youtube.com/vi/ExTzx3l4fKg/sddefault.jpg',
-      ],
+      gif: '/video_gif.gif',
+      images: [],
     },
     art: {
       path: '/art',
@@ -142,10 +141,8 @@ const Landing = () => {
       path: '/light',
       label: 'light',
       headerImage: '/light_document.png',
-      images: [
-        '/light/Steph-5.jpg',
-        '/light/DJ_6.jpg',
-      ],
+      gif: '/light_gif.gif',
+      images: [],
     },
   }
 
@@ -197,7 +194,7 @@ const Landing = () => {
         <SectionBlock section={sections.world} className="w-[30%] ml-[18%] mb-6" />
         <SectionBlock section={sections.video} className="w-[32%] ml-[52%] -mt-16 mb-10" />
         <SectionBlock section={sections.art} className="w-[35%] ml-[3%] mb-6" />
-        <SectionBlock section={sections.light} className="w-[22%] ml-[60%] -mt-6" />
+        <SectionBlock section={sections.light} className="w-[33%] ml-[52%] -mt-6" />
       </div>
 
       {/* Mobile — simple single column stack */}

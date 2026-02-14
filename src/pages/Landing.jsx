@@ -161,7 +161,7 @@ const Landing = () => {
           />
           <div className="absolute right-6 flex items-center space-x-6">
             <a
-              href="mailto:contact@skaiz.world"
+              href="mailto:Skaiz.co@gmail.com"
               className="text-black text-sm tracking-wider hover:opacity-70 transition-opacity duration-300"
             >
               contact

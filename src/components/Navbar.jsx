@@ -6,13 +6,12 @@ const Navbar = () => {
   const location = useLocation()
 
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/editorial', label: 'Editorial' },
-    { path: '/art', label: 'Art' },
-    { path: '/light', label: 'Light' },
-    { path: '/memories', label: 'Memories' },
-    { path: '/video', label: 'Video' },
-    { path: '/world', label: 'World' },
+    { path: '/editorial', label: 'Editorial', headerImage: '/editorial_document.png' },
+    { path: '/art', label: 'Art', headerImage: '/ARTDOCUMENT.png' },
+    { path: '/light', label: 'Light', headerImage: '/light_document.png' },
+    { path: '/memories', label: 'Memories', headerImage: '/Memories_Document.png' },
+    { path: '/video', label: 'Video', headerImage: '/video_document.png' },
+    { path: '/world', label: 'World', headerImage: '/world_document.png' },
   ]
 
   const isActive = (path) => location.pathname === path
@@ -37,18 +36,22 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm tracking-wider transition-colors duration-300 font-medium ${
+                className={`block transition-opacity duration-300 ${
                   isActive(link.path)
-                    ? 'text-black border-b-2 border-black'
-                    : 'text-gray-600 hover:text-black'
+                    ? 'opacity-100 border-b border-black pb-0.5'
+                    : 'opacity-50 hover:opacity-100'
                 }`}
               >
-                {link.label}
+                <img
+                  src={link.headerImage}
+                  alt={link.label}
+                  className="h-6 w-auto object-contain"
+                />
               </Link>
             ))}
           </div>
@@ -65,20 +68,24 @@ const Navbar = () => {
         </div>
 
         {/* Mobile  */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-64 mt-6' : 'max-h-0'}`}>
-          <div className="flex flex-col space-y-4 py-4 border-t border-gray-200">
+        <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 mt-6' : 'max-h-0'}`}>
+          <div className="flex flex-col space-y-5 py-4 border-t border-gray-200">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`text-sm tracking-wider transition-colors duration-300 ${
+                className={`block transition-opacity duration-300 ${
                   isActive(link.path)
-                    ? 'text-black font-medium'
-                    : 'text-gray-600 hover:text-black'
+                    ? 'opacity-100'
+                    : 'opacity-50 hover:opacity-100'
                 }`}
               >
-                {link.label}
+                <img
+                  src={link.headerImage}
+                  alt={link.label}
+                  className="h-7.5 w-auto object-contain"
+                />
               </Link>
             ))}
           </div>

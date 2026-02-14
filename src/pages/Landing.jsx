@@ -56,9 +56,7 @@ const ImageCycler = ({ images, interval = 150 }) => {
           className="w-full h-full object-contain"
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="w-6 h-6 border-2 border-gray-300 border-t-black rounded-full animate-spin" />
-        </div>
+        <div className="w-full h-full bg-linear-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse" />
       )}
     </div>
   )
@@ -71,7 +69,7 @@ const SectionBlock = ({ section, className = '' }) => (
         <img
           src={section.headerImage}
           alt={section.label}
-          className="h-6 md:h-8 lg:h-10 w-auto object-contain"
+          className="h-12 md:h-16 lg:h-20 w-auto object-contain"
         />
       ) : (
         <h2 className="text-xl md:text-2xl font-serif tracking-wider">{section.label}</h2>
@@ -131,7 +129,7 @@ const Landing = () => {
     art: {
       path: '/art',
       label: 'art',
-      headerImage: null,
+      headerImage: '/ARTDOCUMENT.png',
       images: [
         '/art/SKAIZ.WORLD_ART01.png',
         '/art/SKAIZ.WORLD_ART02.png',
@@ -143,7 +141,7 @@ const Landing = () => {
     light: {
       path: '/light',
       label: 'light',
-      headerImage: null,
+      headerImage: '/light_document.png',
       images: [
         '/light/Steph-5.jpg',
         '/light/DJ_6.jpg',

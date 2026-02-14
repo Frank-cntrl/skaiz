@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import LazyImage from '../components/LazyImage'
 
 const Light = () => {
   const projects = [
@@ -44,8 +45,11 @@ const Light = () => {
     <div className="min-h-screen bg-white text-black pt-20">
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
-        <h1 className="text-4xl md:text-6xl font-serif tracking-wider mb-8">Light</h1>
-        <div className="h-px bg-black w-24 mb-12" />
+        <img 
+          src="/light_document.png" 
+          alt="Light" 
+          className="h-16 md:h-24 w-auto object-contain mb-12"
+        />
       </div>
 
       {/* Projects */}
@@ -73,10 +77,12 @@ const Light = () => {
                 rel="noopener noreferrer"
                 className={`group block relative overflow-hidden ${project.type === 'video' ? 'aspect-video' : ''}`}
               >
-                <img
+                <LazyImage
                   src={project.image || project.thumbnail}
                   alt={project.title}
-                  className={`w-full group-hover:scale-105 transition-transform duration-500 ${project.type === 'video' ? 'h-full object-cover' : 'h-auto object-contain'}`}
+                  className={project.type === 'video' ? 'w-full h-full' : ''}
+                  imgClassName={`group-hover:scale-105 transition-transform duration-500 ${project.type === 'video' ? 'h-full object-cover' : 'h-auto object-contain'}`}
+                  aspectRatio={project.type === 'video' ? null : '3 / 4'}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
               </a>

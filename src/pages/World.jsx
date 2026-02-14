@@ -1,5 +1,56 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import LazyImage from '../components/LazyImage'
+
+// ── Sub-components defined OUTSIDE World so they stay stable across re-renders ──
+
+// Pseudo-random number from image id — consistent across re-renders
+const rand = (id, seed = 1) => ((id * 7 + seed * 13 + 3) % 11) / 10
+
+// Scattered collage: width 38-48%, margin-left 0-3%, so two always fit per row
+const collageStyle = (id) => {
+  const w = 38 + Math.round(rand(id, 1) * 10)
+  const mt = -5 + Math.round(rand(id, 2) * 20)
+  const ml = Math.round(rand(id, 3) * 3)
+  return { width: `${w}%`, marginTop: `${mt}px`, marginLeft: `${ml}%`, marginBottom: '8px' }
+}
+
+const StaggeredGallery = ({ images, large = false, onSelect }) => (
+  <div className="flex flex-wrap items-start">
+    {images.map((image) => (
+      <LazyImage
+        key={image.id}
+        src={image.src}
+        alt={image.alt}
+        className="cursor-pointer"
+        imgClassName={'transition-transform duration-500 hover:scale-105' + (large ? ' object-contain' : '')}
+        style={collageStyle(image.id)}
+        onClick={() => onSelect(image)}
+      />
+    ))}
+  </div>
+)
+
+const SectionHeader = ({ section }) => (
+  <div className="mb-4">
+    {section.headerImage ? (
+      <img
+        src={section.headerImage}
+        alt={section.title}
+        className="h-20 md:h-28 w-auto object-contain"
+      />
+    ) : (
+      <div>
+        <h2 className="text-2xl md:text-3xl font-serif tracking-wider">{section.title}</h2>
+        {section.subtitle && (
+          <p className="text-xs text-black/40 tracking-wider mt-1">{section.subtitle}</p>
+        )}
+      </div>
+    )}
+  </div>
+)
+
+// ── Main component ──
 
 const World = () => {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -9,6 +60,7 @@ const World = () => {
     id: 'paris',
     title: 'Paris, France',
     subtitle: 'September 2025',
+    headerImage: '/world/ParisDocument_SkaizWorld.png',
     images: Array.from({ length: 20 }, (_, i) => ({
       id: i + 1,
       src: `/world/PARIS 2025/parisFilm-${i + 1}.jpg`,
@@ -52,6 +104,7 @@ const World = () => {
     id: 'madiera',
     title: 'Madeira, Portugal',
     subtitle: 'May 2025',
+    headerImage: '/world/Madiera2025_document.png',
     images: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 24].map((num) => ({
       id: num,
       src: `/world/Madiera 2025/Madiera2025-${num}.jpg`,
@@ -79,87 +132,6 @@ const World = () => {
     return () => window.removeEventListener('keydown', handleEscape)
   }, [])
 
-  // Staggered gallery — images at varying sizes
-  const StaggeredGallery = ({ images, large = false }) => {
-    // Assign sizes: cycle through small, medium, large patterns
-    const sizes = large
-      ? ['col-span-2 row-span-2', 'col-span-1', 'col-span-1', 'col-span-2 row-span-2', 'col-span-1', 'col-span-1']
-      : ['col-span-1', 'col-span-1', 'col-span-2', 'col-span-1', 'col-span-1', 'col-span-1', 'col-span-2']
-
-    // Pseudo-random number from image id — consistent across re-renders
-    const rand = (id, seed = 1) => ((id * 7 + seed * 13 + 3) % 11) / 10
-
-    // Scattered collage: width 38-48%, margin-left 0-3%, so two always fit per row
-    const collageStyle = (id) => {
-      const w = 38 + Math.round(rand(id, 1) * 10)        // 38% to 48%
-      const mt = -5 + Math.round(rand(id, 2) * 20)       // -5px to 15px
-      const ml = Math.round(rand(id, 3) * 3)             // 0% to 3%
-      return { width: `${w}%`, marginTop: `${mt}px`, marginLeft: `${ml}%`, marginBottom: '8px' }
-    }
-
-    if (large) {
-      return (
-        <div className="flex flex-wrap items-start">
-          {images.map((image) => (
-            <div
-              key={image.id}
-              className="cursor-pointer overflow-hidden"
-              style={collageStyle(image.id)}
-              onClick={() => setSelectedImage(image)}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                className="w-full h-auto object-contain transition-transform duration-500 hover:scale-105"
-              />
-            </div>
-          ))}
-        </div>
-      )
-    }
-
-    return (
-      <div className="flex flex-wrap items-start">
-        {images.map((image) => (
-          <div
-            key={image.id}
-            className="cursor-pointer overflow-hidden"
-            style={collageStyle(image.id)}
-            onClick={() => setSelectedImage(image)}
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              loading="lazy"
-              className="w-full h-auto transition-transform duration-500 hover:scale-105"
-            />
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  // Section header component
-  const SectionHeader = ({ section }) => (
-    <div className="mb-4">
-      {section.headerImage ? (
-        <img
-          src={section.headerImage}
-          alt={section.title}
-          className="h-20 md:h-28 w-auto object-contain"
-        />
-      ) : (
-        <div>
-          <h2 className="text-2xl md:text-3xl font-serif tracking-wider">{section.title}</h2>
-          {section.subtitle && (
-            <p className="text-xs text-black/40 tracking-wider mt-1">{section.subtitle}</p>
-          )}
-        </div>
-      )}
-    </div>
-  )
-
   return (
     <div className="min-h-screen bg-white text-black pt-20">
       {/* Page Header */}
@@ -180,13 +152,13 @@ const World = () => {
             {/* Paris */}
             <div>
               <SectionHeader section={paris} />
-              <StaggeredGallery images={paris.images} />
+              <StaggeredGallery images={paris.images} onSelect={setSelectedImage} />
             </div>
 
             {/* San Sebastian / Dyptychs — larger images */}
             <div>
               <SectionHeader section={dyptychs} />
-              <StaggeredGallery images={dyptychs.images} large />
+              <StaggeredGallery images={dyptychs.images} large onSelect={setSelectedImage} />
             </div>
           </div>
 
@@ -195,13 +167,13 @@ const World = () => {
             {/* Puerto Rico */}
             <div>
               <SectionHeader section={puertoRico} />
-              <StaggeredGallery images={puertoRico.images} />
+              <StaggeredGallery images={puertoRico.images} onSelect={setSelectedImage} />
             </div>
 
             {/* Madeira */}
             <div>
               <SectionHeader section={madeira} />
-              <StaggeredGallery images={madeira.images} />
+              <StaggeredGallery images={madeira.images} onSelect={setSelectedImage} />
             </div>
           </div>
         </div>
@@ -209,7 +181,7 @@ const World = () => {
         {/* Aventuras — full width across both columns */}
         <div className="pb-24">
           <SectionHeader section={aventuras} />
-          <StaggeredGallery images={aventuras.images} />
+          <StaggeredGallery images={aventuras.images} onSelect={setSelectedImage} />
         </div>
       </div>
 

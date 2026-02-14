@@ -1,3 +1,5 @@
+import LazyImage from '../components/LazyImage'
+
 const Video = () => {
   const videos = [
     {
@@ -80,10 +82,12 @@ const Video = () => {
                     rel="noopener noreferrer"
                     className="block w-full h-full relative group-hover:scale-105 transition-transform duration-500"
                   >
-                    <img
+                    <LazyImage
                       src={video.thumbnail}
                       alt={video.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full"
+                      imgClassName="h-full object-cover"
+                      aspectRatio={null}
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
                   </a>

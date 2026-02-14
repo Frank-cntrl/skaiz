@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import LazyImage from '../components/LazyImage'
 
 const Art = () => {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -30,8 +31,17 @@ const Art = () => {
 
   return (
     <div className="min-h-screen bg-white text-black pt-20">
+      {/* Page Header */}
+      <div className="max-w-7xl mx-auto px-8 py-12">
+        <img 
+          src="/ARTDOCUMENT.png" 
+          alt="Art" 
+          className="h-16 md:h-24 w-auto object-contain mb-12"
+        />
+      </div>
+
       {/* Image Gallery — scattered collage */}
-      <div className="max-w-7xl mx-auto px-8 py-12 pb-24">
+      <div className="max-w-7xl mx-auto px-8 pb-24">
         <div className="flex flex-wrap items-start">
           {artImages.map((image, index) => {
             // Use index for more variation with small image sets
@@ -40,9 +50,12 @@ const Art = () => {
             const mt = -8 + Math.round(rand(index, 2) * 30)        // -8px to 22px
             const ml = Math.round(rand(index, 3) * 5)              // 0% to 5%
             return (
-              <div
+              <LazyImage
                 key={image.id}
-                className="cursor-pointer overflow-hidden"
+                src={image.src}
+                alt={image.alt}
+                className="cursor-pointer"
+                imgClassName="transition-transform duration-500 hover:scale-105"
                 style={{
                   width: `${w}%`,
                   marginTop: `${mt}px`,
@@ -50,14 +63,7 @@ const Art = () => {
                   marginBottom: '10px',
                 }}
                 onClick={() => setSelectedImage(image)}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                  className="w-full h-auto transition-transform duration-500 hover:scale-105"
-                />
-              </div>
+              />
             )
           })}
         </div>

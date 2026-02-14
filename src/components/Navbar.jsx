@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
+
+  // Close mobile menu on every route change
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [location.pathname])
 
   const navLinks = [
     { path: '/editorial', label: 'Editorial', headerImage: '/editorial_document.png' },

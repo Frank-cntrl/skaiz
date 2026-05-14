@@ -94,53 +94,53 @@ const Landing = () => {
     editorial: {
       path: '/editorial',
       label: 'editorial',
-      headerImage: '/editorial_document.png',
-      images: Array.from({ length: 8 }, (_, i) => `/editorial/SKAIZ.WORLD-${i + 1}.jpg`),
+      headerImage: '/editorial_document.webp',
+      images: Array.from({ length: 8 }, (_, i) => `/editorial/SKAIZ.WORLD-${i + 1}.webp`),
     },
     memories: {
       path: '/memories',
       label: 'memories',
-      headerImage: '/Memories_Document.png',
-      images: Array.from({ length: 8 }, (_, i) => `/Memories/SKAIZ.WORLD_film-${i + 1}.jpg`),
+      headerImage: '/Memories_Document.webp',
+      images: Array.from({ length: 8 }, (_, i) => `/Memories/SKAIZ.WORLD_film-${i + 1}.webp`),
     },
     world: {
       path: '/world',
       label: 'world',
-      headerImage: '/world_document.png',
+      headerImage: '/world_document.webp',
       images: [
-        '/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-1.jpg',
-        '/world/Madiera 2025/Madiera2025-1.jpg',
-        '/world/PARIS 2025/parisFilm-1.jpg',
-        '/world/Puerto Rico 2025/PuertoRico25-film-1.jpg',
-        '/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-5.jpg',
-        '/world/Madiera 2025/Madiera2025-3.jpg',
-        '/world/PARIS 2025/parisFilm-3.jpg',
-        '/world/Puerto Rico 2025/PuertoRico25-film-4.jpg',
+        '/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-1.webp',
+        '/world/Madiera 2025/Madiera2025-1.webp',
+        '/world/PARIS 2025/parisFilm-1.webp',
+        '/world/Puerto Rico 2025/PuertoRico25-film-1.webp',
+        '/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-5.webp',
+        '/world/Madiera 2025/Madiera2025-3.webp',
+        '/world/PARIS 2025/parisFilm-3.webp',
+        '/world/Puerto Rico 2025/PuertoRico25-film-4.webp',
       ],
     },
     video: {
       path: '/video',
       label: 'video',
-      headerImage: '/video_document.png',
+      headerImage: '/video_document.webp',
       gif: '/video_gif.gif',
       images: [],
     },
     art: {
       path: '/art',
       label: 'art',
-      headerImage: '/ARTDOCUMENT.png',
+      headerImage: '/ARTDOCUMENT.webp',
       images: [
-        '/art/SKAIZ.WORLD_ART01.png',
-        '/art/SKAIZ.WORLD_ART02.png',
-        '/art/SKAIZ.WORLD_ART03.png',
-        '/art/SKAIZ.WORLD_ART04.png',
-        '/art/SKAIZ.WORLD_ART05.png',
+        '/art/SKAIZ.WORLD_ART01.webp',
+        '/art/SKAIZ.WORLD_ART02.webp',
+        '/art/SKAIZ.WORLD_ART03.webp',
+        '/art/SKAIZ.WORLD_ART04.webp',
+        '/art/SKAIZ.WORLD_ART05.webp',
       ],
     },
     light: {
       path: '/light',
       label: 'light',
-      headerImage: '/light_document.png',
+      headerImage: '/light_document.webp',
       gif: '/light_gif.gif',
       images: [],
     },
@@ -152,7 +152,7 @@ const Landing = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white py-3">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-center relative">
           <img
-            src="/favicon.png"
+            src="/favicon.webp"
             alt="Skaiz"
             className="h-8 w-auto object-contain"
           />
@@ -181,7 +181,7 @@ const Landing = () => {
       {/* Logo */}
       <div className="w-full flex justify-center py-8">
         <img
-          src="/SkaizWorld_document.png"
+          src="/SkaizWorld_document.webp"
           alt="Skaiz World"
           className="h-16 md:h-24 w-auto object-contain"
         />

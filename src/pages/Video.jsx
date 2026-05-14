@@ -43,7 +43,7 @@ const Video = () => {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
         <img 
-          src="/video_document.png" 
+          src="/video_document.webp" 
           alt="Video" 
           className="h-16 md:h-24 w-auto object-contain mb-12"
         />

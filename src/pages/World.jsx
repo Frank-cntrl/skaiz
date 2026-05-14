@@ -60,10 +60,10 @@ const World = () => {
     id: 'paris',
     title: 'Paris, France',
     subtitle: 'September 2025',
-    headerImage: '/world/ParisDocument_SkaizWorld.png',
+    headerImage: '/world/ParisDocument_SkaizWorld.webp',
     images: Array.from({ length: 20 }, (_, i) => ({
       id: i + 1,
-      src: `/world/PARIS 2025/parisFilm-${i + 1}.jpg`,
+      src: `/world/PARIS 2025/parisFilm-${i + 1}.webp`,
       alt: `Paris ${i + 1}`,
     })),
   }
@@ -72,11 +72,11 @@ const World = () => {
     id: 'puertorico',
     title: 'Puerto Rico',
     subtitle: 'January 2025',
-    headerImage: '/world/Puerto Rico 2025/PeurtoRico2025_document.png',
+    headerImage: '/world/Puerto Rico 2025/PeurtoRico2025_document.webp',
     images: [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27].map(
       (num) => ({
         id: num,
-        src: `/world/Puerto Rico 2025/PuertoRico25-film-${num}.jpg`,
+        src: `/world/Puerto Rico 2025/PuertoRico25-film-${num}.webp`,
         alt: `Puerto Rico ${num}`,
       })
     ),
@@ -86,17 +86,17 @@ const World = () => {
     id: 'dyptychs',
     title: 'San Sebastian, Spain',
     subtitle: 'July 2025',
-    headerImage: '/world/Dyptychs de san sebastian, 2025/dyptchsdesansebDOCUMENT.png',
+    headerImage: '/world/Dyptychs de san sebastian, 2025/dyptchsdesansebDOCUMENT.webp',
     images: [
-      { id: 1, src: '/world/Dyptychs de san sebastian, 2025/SanSebastian_skaizworld.png', alt: 'San Sebastian 1' },
-      { id: 2, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_2.png', alt: 'San Sebastian 2' },
-      { id: 3, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_3.png', alt: 'San Sebastian 3' },
-      { id: 4, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_4.png', alt: 'San Sebastian 4' },
-      { id: 5, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_5.png', alt: 'San Sebastian 5' },
-      { id: 6, src: '/world/Dyptychs de san sebastian, 2025/sansebastian6.png', alt: 'San Sebastian 6' },
-      { id: 7, src: '/world/Dyptychs de san sebastian, 2025/beach2.jpg', alt: 'Beach 2' },
-      { id: 8, src: '/world/Dyptychs de san sebastian, 2025/beach3.jpg', alt: 'Beach 3' },
-      { id: 9, src: '/world/Dyptychs de san sebastian, 2025/shereen_ss_skaiz02.jpg', alt: 'Shereen' },
+      { id: 1, src: '/world/Dyptychs de san sebastian, 2025/SanSebastian_skaizworld.webp', alt: 'San Sebastian 1' },
+      { id: 2, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_2.webp', alt: 'San Sebastian 2' },
+      { id: 3, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_3.webp', alt: 'San Sebastian 3' },
+      { id: 4, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_4.webp', alt: 'San Sebastian 4' },
+      { id: 5, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_5.webp', alt: 'San Sebastian 5' },
+      { id: 6, src: '/world/Dyptychs de san sebastian, 2025/sansebastian6.webp', alt: 'San Sebastian 6' },
+      { id: 7, src: '/world/Dyptychs de san sebastian, 2025/beach2.webp', alt: 'Beach 2' },
+      { id: 8, src: '/world/Dyptychs de san sebastian, 2025/beach3.webp', alt: 'Beach 3' },
+      { id: 9, src: '/world/Dyptychs de san sebastian, 2025/shereen_ss_skaiz02.webp', alt: 'Shereen' },
     ],
   }
 
@@ -104,10 +104,10 @@ const World = () => {
     id: 'madiera',
     title: 'Madeira, Portugal',
     subtitle: 'May 2025',
-    headerImage: '/world/Madiera2025_document.png',
+    headerImage: '/world/Madiera2025_document.webp',
     images: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 24].map((num) => ({
       id: num,
-      src: `/world/Madiera 2025/Madiera2025-${num}.jpg`,
+      src: `/world/Madiera 2025/Madiera2025-${num}.webp`,
       alt: `Madiera ${num}`,
     })),
   }
@@ -115,10 +115,10 @@ const World = () => {
   const aventuras = {
     id: 'montanas',
     title: 'Aventuras de las montañas',
-    headerImage: '/world/aventuras de las montañas vascas, 2025/montanas_document.png',
+    headerImage: '/world/aventuras de las montañas vascas, 2025/montanas_document.webp',
     images: Array.from({ length: 34 }, (_, i) => ({
       id: i + 1,
-      src: `/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-${i + 1}.jpg`,
+      src: `/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-${i + 1}.webp`,
       alt: `Aventuras de las montañas ${i + 1}`,
     })),
   }
@@ -137,7 +137,7 @@ const World = () => {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
         <img
-          src="/world_document.png"
+          src="/world_document.webp"
           alt="World"
           className="h-16 md:h-24 w-auto object-contain mb-12"
         />

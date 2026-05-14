@@ -9,7 +9,7 @@ const Light = () => {
       role: 'Light Designer',
       featuring: 'Steph Suganami',
       link: 'https://www.papermag.com/stephanie-suganami',
-      image: '/light/Steph-5.jpg',
+      image: '/light/Steph-5.webp',
       type: 'article',
     },
     {
@@ -18,7 +18,7 @@ const Light = () => {
       role: 'Head Gaffer',
       featuring: null,
       link: 'https://www.youtube.com/watch?v=L1wRfgzd0ic',
-      thumbnail: 'https://img.youtube.com/vi/L1wRfgzd0ic/maxresdefault.jpg',
+      thumbnail: 'https://img.youtube.com/vi/L1wRfgzd0ic/maxresdefault.webp',
       type: 'video',
     },
     {
@@ -27,7 +27,7 @@ const Light = () => {
       role: 'Lighting Designer',
       featuring: 'Dominique Jackson',
       link: 'https://www.papermag.com/dominique-jackson#rebelltitem19',
-      image: '/light/DJ_6.jpg',
+      image: '/light/DJ_6.webp',
       type: 'article',
     },
     {
@@ -36,7 +36,7 @@ const Light = () => {
       role: 'Head Gaffer',
       featuring: 'DEY-G ft. Adol & Syrosis',
       link: 'https://www.youtube.com/watch?v=7oQy7tEP88s',
-      thumbnail: 'https://img.youtube.com/vi/7oQy7tEP88s/maxresdefault.jpg',
+      thumbnail: 'https://img.youtube.com/vi/7oQy7tEP88s/maxresdefault.webp',
       type: 'video',
     },
   ]
@@ -46,7 +46,7 @@ const Light = () => {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
         <img 
-          src="/light_document.png" 
+          src="/light_document.webp" 
           alt="Light" 
           className="h-16 md:h-24 w-auto object-contain mb-12"
         />

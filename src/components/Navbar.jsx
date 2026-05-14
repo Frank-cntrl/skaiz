@@ -11,12 +11,12 @@ const Navbar = () => {
   }, [location.pathname])
 
   const navLinks = [
-    { path: '/editorial', label: 'Editorial', headerImage: '/editorial_document.png' },
-    { path: '/art', label: 'Art', headerImage: '/ARTDOCUMENT.png' },
-    { path: '/light', label: 'Light', headerImage: '/light_document.png' },
-    { path: '/memories', label: 'Memories', headerImage: '/Memories_Document.png' },
-    { path: '/video', label: 'Video', headerImage: '/video_document.png' },
-    { path: '/world', label: 'World', headerImage: '/world_document.png' },
+    { path: '/editorial', label: 'Editorial', headerImage: '/editorial_document.webp' },
+    { path: '/art', label: 'Art', headerImage: '/ARTDOCUMENT.webp' },
+    { path: '/light', label: 'Light', headerImage: '/light_document.webp' },
+    { path: '/memories', label: 'Memories', headerImage: '/Memories_Document.webp' },
+    { path: '/video', label: 'Video', headerImage: '/video_document.webp' },
+    { path: '/world', label: 'World', headerImage: '/world_document.webp' },
   ]
 
   const isActive = (path) => location.pathname === path
@@ -34,7 +34,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="hover:opacity-70 transition-opacity duration-300">
             <img 
-              src="/SkaizWorld_document.png" 
+              src="/SkaizWorld_document.webp" 
               alt="Skaiz World" 
               className="h-8 w-auto object-contain justify-center"
             />

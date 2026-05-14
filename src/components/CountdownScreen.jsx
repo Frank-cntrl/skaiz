@@ -6,7 +6,7 @@ const SCREEN_CONFIG = {
   subtitle: 'WORLD',
   message: 'Coming Soon',
   instagramUrl: 'https://www.instagram.com/iamskaiz/',
-  backgroundImage: '/skaiz-world.png',
+  backgroundImage: '/skaiz-world.webp',
 };
 
 const CountdownScreen = ({ revealDate }) => {
@@ -55,8 +55,8 @@ const CountdownScreen = ({ revealDate }) => {
           src="/memories-sequence.gif"
           alt="Memories Sequence"
           className="w-full rounded-lg"
-          style={{ 
-            maxHeight: '500px', 
+          style={{
+            maxHeight: '500px',
             objectFit: 'contain'
           }}
         />

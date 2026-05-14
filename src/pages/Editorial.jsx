@@ -7,7 +7,7 @@ const Editorial = () => {
   // Generate array of all 45 editorial images
   const editorialImages = Array.from({ length: 45 }, (_, i) => ({
     id: i + 1,
-    src: `/editorial/SKAIZ.WORLD-${i + 1}.jpg`,
+    src: `/editorial/SKAIZ.WORLD-${i + 1}.webp`,
     alt: `Editorial ${i + 1}`,
   }))
 
@@ -26,7 +26,7 @@ const Editorial = () => {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
         <img 
-          src="/editorial_document.png" 
+          src="/editorial_document.webp" 
           alt="Editorial" 
           className="h-16 md:h-24 w-auto object-contain mb-12"
         />
@@ -35,7 +35,7 @@ const Editorial = () => {
       {/* Cover Image */}
       <div className="w-full flex justify-center px-8 mb-16">
         <LazyImage 
-          src="/SKAIZ.WORLD_COVERPAGE.jpg" 
+          src="/SKAIZ.WORLD_COVERPAGE.webp" 
           alt="Skaiz World Editorial Cover" 
           className="w-full max-w-4xl"
         />

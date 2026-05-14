@@ -5,30 +5,30 @@ import LazyImage from '../components/LazyImage'
 const Art = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
-  // All art images including SKAIZ.WORLD_ART.png
+  // All art images
   const artImages = [
-    { id: 12, src: '/art/drawings_skaiz.world2-1.jpg', alt: 'Drawings 1' },
-    { id: 13, src: '/art/drawings_skaiz.world2-2.jpg', alt: 'Drawings 2' },
-    { id: 14, src: '/art/drawings_skaiz.world2-4.jpg', alt: 'Drawings 4' },
-    { id: 15, src: '/art/drawings_skaiz.world2-5.jpg', alt: 'Drawings 5' },
-    { id: 16, src: '/art/Jtrain_skaiz.world2-1.jpg', alt: 'Jtrain' },
-    { id: 17, src: '/art/loiterers_skaiz.world2-1.jpg', alt: 'Loiterers' },
-    { id: 18, src: '/art/lunatico_skaiz.world2-1.jpg', alt: 'Lunatico' },
-    { id: 19, src: '/art/numbers_skaiz.world2-1.jpg', alt: 'Numbers' },
-    { id: 20, src: '/art/obession_skaiz.world2-1.jpg', alt: 'Obsession 1' },
-    { id: 21, src: '/art/obsession_skaiz.world2-2.jpg', alt: 'Obsession 2' },
-    { id: 22, src: '/art/sheflies_skaiz.world2-1.jpg', alt: 'She Flies' },
-    { id: 0, src: '/art/SKAIZ.WORLD_ART.png', alt: 'Skaiz World Art' },
-    { id: 1, src: '/art/SKAIZ.WORLD_ART01.png', alt: 'Art 1' },
-    { id: 2, src: '/art/SKAIZ.WORLD_ART02.png', alt: 'Art 2' },
-    { id: 3, src: '/art/SKAIZ.WORLD_ART03.png', alt: 'Art 3' },
-    { id: 4, src: '/art/SKAIZ.WORLD_ART04.png', alt: 'Art 4' },
-    { id: 5, src: '/art/SKAIZ.WORLD_ART05.png', alt: 'Art 5' },
-    { id: 6, src: '/art/SKAIZ.WORLD_ART06.png', alt: 'Art 6' },
-    { id: 7, src: '/art/SKAIZ.WORLD_ART07.png', alt: 'Art 7' },
-    { id: 8, src: '/art/SKAIZ.WORLD_ART08.png', alt: 'Art 8' },
-    { id: 10, src: '/art/SKAIZ.WORLD_ART10.png', alt: 'Art 10' },
-    { id: 11, src: '/art/SKAIZ.WORLD_ART11.png', alt: 'Art 11' },
+    { id: 12, src: '/art/drawings_skaiz.world2-1.webp', alt: 'Drawings 1' },
+    { id: 13, src: '/art/drawings_skaiz.world2-2.webp', alt: 'Drawings 2' },
+    { id: 14, src: '/art/drawings_skaiz.world2-4.webp', alt: 'Drawings 4' },
+    { id: 15, src: '/art/drawings_skaiz.world2-5.webp', alt: 'Drawings 5' },
+    { id: 16, src: '/art/Jtrain_skaiz.world2-1.webp', alt: 'Jtrain' },
+    { id: 17, src: '/art/loiterers_skaiz.world2-1.webp', alt: 'Loiterers' },
+    { id: 18, src: '/art/lunatico_skaiz.world2-1.webp', alt: 'Lunatico' },
+    { id: 19, src: '/art/numbers_skaiz.world2-1.webp', alt: 'Numbers' },
+    { id: 20, src: '/art/obession_skaiz.world2-1.webp', alt: 'Obsession 1' },
+    { id: 21, src: '/art/obsession_skaiz.world2-2.webp', alt: 'Obsession 2' },
+    { id: 22, src: '/art/sheflies_skaiz.world2-1.webp', alt: 'She Flies' },
+    { id: 0, src: '/art/SKAIZ.WORLD_ART.webp', alt: 'Skaiz World Art' },
+    { id: 1, src: '/art/SKAIZ.WORLD_ART01.webp', alt: 'Art 1' },
+    { id: 2, src: '/art/SKAIZ.WORLD_ART02.webp', alt: 'Art 2' },
+    { id: 3, src: '/art/SKAIZ.WORLD_ART03.webp', alt: 'Art 3' },
+    { id: 4, src: '/art/SKAIZ.WORLD_ART04.webp', alt: 'Art 4' },
+    { id: 5, src: '/art/SKAIZ.WORLD_ART05.webp', alt: 'Art 5' },
+    { id: 6, src: '/art/SKAIZ.WORLD_ART06.webp', alt: 'Art 6' },
+    { id: 7, src: '/art/SKAIZ.WORLD_ART07.webp', alt: 'Art 7' },
+    { id: 8, src: '/art/SKAIZ.WORLD_ART08.webp', alt: 'Art 8' },
+    { id: 10, src: '/art/SKAIZ.WORLD_ART10.webp', alt: 'Art 10' },
+    { id: 11, src: '/art/SKAIZ.WORLD_ART11.webp', alt: 'Art 11' },
   ]
 
   // Close modal on ESC key
@@ -45,7 +45,7 @@ const Art = () => {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
         <img 
-          src="/ARTDOCUMENT.png" 
+          src="/ARTDOCUMENT.webp" 
           alt="Art" 
           className="h-16 md:h-24 w-auto object-contain mb-12"
         />

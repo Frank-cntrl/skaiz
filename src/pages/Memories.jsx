@@ -8,7 +8,7 @@ const Memories = () => {
   // Generate array of all 134 memories images
   const memoriesImages = Array.from({ length: 134 }, (_, i) => ({
     id: i + 1,
-    src: `/Memories/SKAIZ.WORLD_film-${i + 1}.jpg`,
+    src: `/Memories/SKAIZ.WORLD_film-${i + 1}.webp`,
     alt: `Memory ${i + 1}`,
   }))
 
@@ -26,7 +26,7 @@ const Memories = () => {
       {/* Page Header */}
       <div className="max-w-7xl mx-auto px-8 py-12">
         <img 
-          src="/Memories_Document.png" 
+          src="/Memories_Document.webp" 
           alt="Memories" 
           className="h-16 md:h-24 w-auto object-contain mb-12"
         />

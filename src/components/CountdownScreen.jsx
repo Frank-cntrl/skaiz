@@ -52,7 +52,7 @@ const CountdownScreen = ({ revealDate }) => {
       {/* Animated GIF */}
       <div className="relative z-10 mb-8 w-full max-w-4xl px-4">
         <img
-          src="/memories-sequence.gif"
+          src="/memories-sequence.webp"
           alt="Memories Sequence"
           className="w-full rounded-lg"
           style={{

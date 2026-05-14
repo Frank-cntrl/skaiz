@@ -122,7 +122,7 @@ const Landing = () => {
       path: '/video',
       label: 'video',
       headerImage: '/video_document.webp',
-      gif: '/video_gif.gif',
+      gif: '/video_gif.webp',
       images: [],
     },
     art: {
@@ -141,7 +141,7 @@ const Landing = () => {
       path: '/light',
       label: 'light',
       headerImage: '/light_document.webp',
-      gif: '/light_gif.gif',
+      gif: '/light_gif.webp',
       images: [],
     },
   }

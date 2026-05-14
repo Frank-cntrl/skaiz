@@ -7,6 +7,17 @@ const Art = () => {
 
   // All art images including SKAIZ.WORLD_ART.png
   const artImages = [
+    { id: 12, src: '/art/drawings_skaiz.world2-1.jpg', alt: 'Drawings 1' },
+    { id: 13, src: '/art/drawings_skaiz.world2-2.jpg', alt: 'Drawings 2' },
+    { id: 14, src: '/art/drawings_skaiz.world2-4.jpg', alt: 'Drawings 4' },
+    { id: 15, src: '/art/drawings_skaiz.world2-5.jpg', alt: 'Drawings 5' },
+    { id: 16, src: '/art/Jtrain_skaiz.world2-1.jpg', alt: 'Jtrain' },
+    { id: 17, src: '/art/loiterers_skaiz.world2-1.jpg', alt: 'Loiterers' },
+    { id: 18, src: '/art/lunatico_skaiz.world2-1.jpg', alt: 'Lunatico' },
+    { id: 19, src: '/art/numbers_skaiz.world2-1.jpg', alt: 'Numbers' },
+    { id: 20, src: '/art/obession_skaiz.world2-1.jpg', alt: 'Obsession 1' },
+    { id: 21, src: '/art/obsession_skaiz.world2-2.jpg', alt: 'Obsession 2' },
+    { id: 22, src: '/art/sheflies_skaiz.world2-1.jpg', alt: 'She Flies' },
     { id: 0, src: '/art/SKAIZ.WORLD_ART.png', alt: 'Skaiz World Art' },
     { id: 1, src: '/art/SKAIZ.WORLD_ART01.png', alt: 'Art 1' },
     { id: 2, src: '/art/SKAIZ.WORLD_ART02.png', alt: 'Art 2' },

@@ -1,6 +1,14 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import CountdownScreen from './components/CountdownScreen'
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
 
 // Reveal date — site goes live automatically when this moment passes
 const REVEAL_DATE = new Date('2026-02-17T00:00:00')
@@ -61,6 +69,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<LoadingScreen />}>
         <div className="min-h-screen bg-white">
           <Navbar />

@@ -76,8 +76,17 @@ const SectionBlock = ({ section, className = '' }) => (
       )}
     </div>
     <div className="overflow-hidden relative aspect-4/3">
-      {section.gif ? (
-        <img src={section.gif} alt={section.label} className="w-full h-full object-cover" />
+      {section.video ? (
+        <video
+          src={section.video}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label={section.label}
+          className="w-full h-full object-cover"
+        />
       ) : section.images.length > 0 ? (
         <ImageCycler images={section.images} interval={180} />
       ) : (
@@ -122,7 +131,7 @@ const Landing = () => {
       path: '/video',
       label: 'video',
       headerImage: '/video_document.webp',
-      gif: '/video_gif.gif',
+      video: '/video_tile.mp4',
       images: [],
     },
     art: {
@@ -141,14 +150,14 @@ const Landing = () => {
       path: '/light',
       label: 'light',
       headerImage: '/light_document.webp',
-      gif: '/light_gif.gif',
+      video: '/light_tile.mp4',
       images: [],
     },
     outside: {
       path: '/outside',
       label: 'outside',
       headerImage: '/outside_document.webp',
-      gif: '/outside_gif.webp',
+      video: '/outside_tile.mp4',
       images: [],
     },
   }

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 
 /**
  * LazyImage — reserves space with a skeleton placeholder while the image loads,
@@ -14,17 +14,15 @@ import { useState, useRef, useEffect } from 'react'
  *  - All standard <img> props (src, alt) are forwarded.
  */
 function LazyImage(props) {
-  const [loaded, setLoaded] = useState(false)
-  const imgRef = useRef(null)
+  // Track which src has finished loading, so a src change automatically reads as "not loaded"
+  const [loadedSrc, setLoadedSrc] = useState(null)
+  const loaded = loadedSrc === props.src
+  const markLoaded = () => setLoadedSrc(props.src)
 
-  // If the image is already cached the onLoad won't fire, so check immediately
-  useEffect(() => {
-    setLoaded(false)
-    const el = imgRef.current
-    if (el && el.complete && el.naturalWidth > 0) {
-      setLoaded(true)
-    }
-  }, [props.src])
+  // If the image is already cached the onLoad may not fire, so check when the element mounts
+  const imgRef = (el) => {
+    if (el && el.complete && el.naturalWidth > 0) markLoaded()
+  }
 
   const aspectRatio = props.aspectRatio !== undefined ? props.aspectRatio : '3 / 4'
 
@@ -57,7 +55,7 @@ function LazyImage(props) {
         src={props.src}
         alt={props.alt}
         loading="lazy"
-        onLoad={() => setLoaded(true)}
+        onLoad={markLoaded}
         className={imgCls}
       />
     </div>

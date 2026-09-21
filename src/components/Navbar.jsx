@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
 
-  // Close mobile menu on every route change
-  useEffect(() => {
-    setIsMenuOpen(false)
-  }, [location.pathname])
-
+  // Mobile menu links close the menu via their onClick below
   const navLinks = [
     { path: '/editorial', label: 'Editorial', headerImage: '/editorial_document.webp' },
     { path: '/art', label: 'Art', headerImage: '/ARTDOCUMENT.webp' },

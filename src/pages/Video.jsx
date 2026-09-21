@@ -25,7 +25,7 @@ const Video = () => {
       credit: 'Directed, Shot, and Lit by Skaiz',
       youtubeUrl: null,
       thumbnail: null,
-      localVideo: '/video/Girlyougotcash_.MP4',
+      localVideo: '/video/Girlyougotcash.mp4',
     },
     {
       id: 4,

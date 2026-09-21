@@ -16,7 +16,9 @@ const Navbar = () => {
     { path: '/outside', label: 'Outside', headerImage: '/outside_document.webp' },
   ]
 
-  const isActive = (path) => location.pathname === path
+  // World stays lit on its location pages (/world/paris, ...)
+  const isActive = (path) =>
+    location.pathname === path || location.pathname.startsWith(`${path}/`)
   
   // Hide navbar on homepage since it has its own layout
   if (location.pathname === '/') {

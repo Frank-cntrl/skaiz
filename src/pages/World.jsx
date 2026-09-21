@@ -1,255 +1,72 @@
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import LazyImage from '../components/LazyImage'
+import { LOCATIONS } from '../data/world'
 
-// ── Sub-components defined OUTSIDE World so they stay stable across re-renders ──
+// Scattered placement for the desktop grid, one entry per location in
+// LOCATIONS order. Written out as literal class strings so Tailwind picks the
+// arbitrary values up when it scans this file.
+const DESKTOP_LAYOUT = [
+  'w-[58%] ml-[4%] mb-6',
+  'w-[36%] ml-[calc(62%+10px)] -mt-10 mb-10',
+  'w-[52%] ml-[2%] mb-6',
+  'w-[44%] ml-[52%] -mt-14 mb-10',
+  'w-[55%] ml-[6%]',
+]
 
-// Pseudo-random number from image id — consistent across re-renders
-const rand = (id, seed = 1) => ((id * 7 + seed * 13 + 3) % 11) / 10
-
-// Scattered collage: width 38-48%, margin-left 0-3%, so two always fit per row
-const collageStyle = (id) => {
-  const w = 38 + Math.round(rand(id, 1) * 10)
-  const mt = -5 + Math.round(rand(id, 2) * 20)
-  const ml = Math.round(rand(id, 3) * 3)
-  return { width: `${w}%`, marginTop: `${mt}px`, marginLeft: `${ml}%`, marginBottom: '8px' }
-}
-
-const StaggeredGallery = ({ images, large = false, onSelect }) => (
-  <div className="flex flex-wrap items-start">
-    {images.map((image) => (
-      <LazyImage
-        key={image.id}
-        src={image.src}
-        alt={image.alt}
-        className="cursor-pointer"
-        imgClassName={'transition-transform duration-500 hover:scale-105' + (large ? ' object-contain' : '')}
-        style={collageStyle(image.id)}
-        onClick={() => onSelect(image)}
-      />
-    ))}
-  </div>
-)
-
-const SectionHeader = ({ section }) => (
-  <div className="mb-4">
-    {section.headerImage ? (
+const LocationBlock = ({ location, className = '' }) => (
+  <Link to={`/world/${location.id}`} className={`group block ${className}`}>
+    <div className="mb-2">
       <img
-        src={section.headerImage}
-        alt={section.title}
-        className="h-20 md:h-28 w-auto object-contain"
+        src={location.headerImage}
+        alt={location.title}
+        className="h-12 md:h-16 lg:h-20 w-auto object-contain"
       />
-    ) : (
-      <div>
-        <h2 className="text-2xl md:text-3xl font-serif tracking-wider">{section.title}</h2>
-        {section.subtitle && (
-          <p className="text-xs text-black/40 tracking-wider mt-1">{section.subtitle}</p>
-        )}
-      </div>
-    )}
-  </div>
+    </div>
+    <div className="overflow-hidden">
+      <LazyImage
+        src={location.cover}
+        alt={location.title}
+        imgClassName="transition-transform duration-500 group-hover:scale-105"
+      />
+    </div>
+  </Link>
 )
 
-// ── Main component ──
-
-const World = () => {
-  const [selectedImage, setSelectedImage] = useState(null)
-
-  // Define sections
-  const paris = {
-    id: 'paris',
-    title: 'Paris, France',
-    subtitle: 'September 2025',
-    headerImage: '/world/ParisDocument_SkaizWorld.webp',
-    images: Array.from({ length: 20 }, (_, i) => ({
-      id: i + 1,
-      src: `/world/PARIS 2025/parisFilm-${i + 1}.webp`,
-      alt: `Paris ${i + 1}`,
-    })),
-  }
-
-  const puertoRico = {
-    id: 'puertorico',
-    title: 'Puerto Rico',
-    subtitle: 'January 2025',
-    headerImage: '/world/Puerto Rico 2025/PeurtoRico2025_document.webp',
-    images: [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27].map(
-      (num) => ({
-        id: num,
-        src: `/world/Puerto Rico 2025/PuertoRico25-film-${num}.webp`,
-        alt: `Puerto Rico ${num}`,
-      })
-    ),
-  }
-
-  const dyptychs = {
-    id: 'dyptychs',
-    title: 'San Sebastian, Spain',
-    subtitle: 'July 2025',
-    headerImage: '/world/Dyptychs de san sebastian, 2025/dyptchsdesansebDOCUMENT.webp',
-    images: [
-      { id: 1, src: '/world/Dyptychs de san sebastian, 2025/SanSebastian_skaizworld.webp', alt: 'San Sebastian 1' },
-      { id: 2, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_2.webp', alt: 'San Sebastian 2' },
-      { id: 3, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_3.webp', alt: 'San Sebastian 3' },
-      { id: 4, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_4.webp', alt: 'San Sebastian 4' },
-      { id: 5, src: '/world/Dyptychs de san sebastian, 2025/sansebastian_5.webp', alt: 'San Sebastian 5' },
-      { id: 6, src: '/world/Dyptychs de san sebastian, 2025/sansebastian6.webp', alt: 'San Sebastian 6' },
-      { id: 7, src: '/world/Dyptychs de san sebastian, 2025/beach2.webp', alt: 'Beach 2' },
-      { id: 8, src: '/world/Dyptychs de san sebastian, 2025/beach3.webp', alt: 'Beach 3' },
-      { id: 9, src: '/world/Dyptychs de san sebastian, 2025/shereen_ss_skaiz02.webp', alt: 'Shereen' },
-    ],
-  }
-
-  const madeira = {
-    id: 'madiera',
-    title: 'Madeira, Portugal',
-    subtitle: 'May 2025',
-    headerImage: '/world/Madiera2025_document.webp',
-    images: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 24].map((num) => ({
-      id: num,
-      src: `/world/Madiera 2025/Madiera2025-${num}.webp`,
-      alt: `Madiera ${num}`,
-    })),
-  }
-
-  const aventuras = {
-    id: 'montanas',
-    title: 'Aventuras de las montañas',
-    headerImage: '/world/aventuras de las montañas vascas, 2025/montanas_document.webp',
-    images: Array.from({ length: 34 }, (_, i) => ({
-      id: i + 1,
-      src: `/world/aventuras de las montañas vascas, 2025/SanSebastianHike_Skaiz-${i + 1}.webp`,
-      alt: `Aventuras de las montañas ${i + 1}`,
-    })),
-  }
-
-  // Close modal on ESC key
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') setSelectedImage(null)
-    }
-    window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
-  }, [])
-
-  return (
-    <div className="min-h-screen bg-white text-black pt-20">
-      {/* Page Header */}
-      <div className="max-w-7xl mx-auto px-8 py-12">
-        <img
-          src="/world_document.webp"
-          alt="World"
-          className="h-16 md:h-24 w-auto object-contain mb-12"
-        />
-      </div>
-
-      {/* ── Mobile layout — simple stack ── */}
-      <div className="md:hidden px-8 space-y-16 pb-24">
-        <div>
-          <SectionHeader section={paris} />
-          <StaggeredGallery images={paris.images} onSelect={setSelectedImage} />
-        </div>
-        <div>
-          <SectionHeader section={puertoRico} />
-          <StaggeredGallery images={puertoRico.images} onSelect={setSelectedImage} />
-        </div>
-        <div>
-          <SectionHeader section={dyptychs} />
-          <StaggeredGallery images={dyptychs.images} large onSelect={setSelectedImage} />
-        </div>
-        <div>
-          <SectionHeader section={madeira} />
-          <StaggeredGallery images={madeira.images} onSelect={setSelectedImage} />
-        </div>
-        <div>
-          <SectionHeader section={aventuras} />
-          <StaggeredGallery images={aventuras.images} onSelect={setSelectedImage} />
-        </div>
-      </div>
-
-      {/* ── Desktop layout — float-based L-shape for Aventuras ── */}
-      <div className="hidden md:block max-w-7xl mx-auto px-8 pb-24">
-
-        {/* Right column — floated so Aventuras can flow around it */}
-        <div className="float-right w-[47%] mt-12 space-y-16">
-          <div>
-            <SectionHeader section={puertoRico} />
-            <StaggeredGallery images={puertoRico.images} onSelect={setSelectedImage} />
-          </div>
-          <div>
-            <SectionHeader section={madeira} />
-            <StaggeredGallery images={madeira.images} onSelect={setSelectedImage} />
-          </div>
-          {/* Divider at bottom of right column */}
-          <div className="h-px bg-black/10 w-full" />
-        </div>
-
-        {/* Left column — Paris + Dyptychs */}
-        <div className="w-[47%] space-y-16">
-          <div>
-            <SectionHeader section={paris} />
-            <StaggeredGallery images={paris.images} onSelect={setSelectedImage} />
-          </div>
-          <div>
-            <SectionHeader section={dyptychs} />
-            <StaggeredGallery images={dyptychs.images} large onSelect={setSelectedImage} />
-          </div>
-        </div>
-
-        {/* Aventuras — L-shape: inline-block images flow in left column while
-            the right float is active, then expand to full width once it clears */}
-        <div className="mt-16">
-          <SectionHeader section={aventuras} />
-          <div>
-            {aventuras.images.map((image) => (
-              <LazyImage
-                key={image.id}
-                src={image.src}
-                alt={image.alt}
-                className="inline-block align-top cursor-pointer"
-                imgClassName="transition-transform duration-500 hover:scale-105"
-                style={collageStyle(image.id)}
-                onClick={() => setSelectedImage(image)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="clear-both" />
-      </div>
-
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors"
-            onClick={() => setSelectedImage(null)}
-          >
-            ×
-          </button>
-          <img
-            src={selectedImage.src}
-            alt={selectedImage.alt}
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-
-      {/* Back to Home */}
-      <div className="text-center pb-12">
-        <Link
-          to="/"
-          className="inline-block border-2 border-black px-6 py-2 text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-300"
-        >
-          ← BACK TO HOME
-        </Link>
-      </div>
+const World = () => (
+  <div className="min-h-screen bg-white text-black pt-20">
+    {/* Page Header */}
+    <div className="max-w-7xl mx-auto px-8 py-12">
+      <img
+        src="/world_document.webp"
+        alt="World"
+        className="h-16 md:h-24 w-auto object-contain mb-12"
+      />
     </div>
-  )
-}
+
+    {/* Scattered Layout — Desktop */}
+    <div className="hidden md:block max-w-6xl mx-auto px-8 pb-24">
+      {LOCATIONS.map((location, i) => (
+        <LocationBlock key={location.id} location={location} className={DESKTOP_LAYOUT[i]} />
+      ))}
+    </div>
+
+    {/* Mobile — simple single column stack */}
+    <div className="md:hidden px-6 pb-24 space-y-10">
+      {LOCATIONS.map((location) => (
+        <LocationBlock key={location.id} location={location} />
+      ))}
+    </div>
+
+    {/* Back to Home */}
+    <div className="text-center pb-12">
+      <Link
+        to="/"
+        className="inline-block border-2 border-black px-6 py-2 text-sm tracking-wider hover:bg-black hover:text-white transition-all duration-300"
+      >
+        ← BACK TO HOME
+      </Link>
+    </div>
+  </div>
+)
 
 export default World

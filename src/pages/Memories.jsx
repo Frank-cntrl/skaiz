@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
-import LazyImage from '../components/LazyImage'
+import Lightbox from '../components/Lightbox'
+import MasonryGallery from '../components/MasonryGallery'
 
 const Memories = () => {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -27,14 +28,7 @@ const Memories = () => {
     alt: `Memory ${i + 1}`,
   }))
 
-  // Close modal on ESC key
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') setSelectedImage(null)
-    }
-    window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
-  }, [])
+  const closeLightbox = useCallback(() => setSelectedImage(null), [])
 
   return (
     <div className="min-h-screen bg-white text-black pt-20">
@@ -49,41 +43,17 @@ const Memories = () => {
 
       {/* Image Gallery — masonry layout */}
       <div className="max-w-7xl mx-auto px-8 pb-24">
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
-          {memoriesImages.map((image) => (
-            <LazyImage
-              key={image.id}
-              src={image.src}
-              alt={image.alt}
-              className="cursor-pointer mb-4 break-inside-avoid"
-              imgClassName="transition-transform duration-500 hover:scale-105"
-              aspectRatio="2 / 3"
-              onClick={() => setSelectedImage(image)}
-            />
-          ))}
-        </div>
+        <MasonryGallery
+          images={memoriesImages}
+          base={2}
+          md={3}
+          lg={4}
+          aspectRatio="2 / 3"
+          onSelect={setSelectedImage}
+        />
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors"
-            onClick={() => setSelectedImage(null)}
-          >
-            ×
-          </button>
-          <img
-            src={selectedImage.src}
-            alt={selectedImage.alt}
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+      <Lightbox image={selectedImage} onClose={closeLightbox} />
 
       {/* Back to Home */}
       <div className="text-center pb-12">

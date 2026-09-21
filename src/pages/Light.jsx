@@ -18,7 +18,7 @@ const Light = () => {
       role: 'Head Gaffer',
       featuring: null,
       link: 'https://www.youtube.com/watch?v=L1wRfgzd0ic',
-      thumbnail: 'https://img.youtube.com/vi/L1wRfgzd0ic/maxresdefault.webp',
+      thumbnail: 'https://img.youtube.com/vi/L1wRfgzd0ic/maxresdefault.jpg',
       type: 'video',
     },
     {
@@ -36,7 +36,7 @@ const Light = () => {
       role: 'Head Gaffer',
       featuring: 'DEY-G ft. Adol & Syrosis',
       link: 'https://www.youtube.com/watch?v=7oQy7tEP88s',
-      thumbnail: 'https://img.youtube.com/vi/7oQy7tEP88s/maxresdefault.webp',
+      thumbnail: 'https://img.youtube.com/vi/7oQy7tEP88s/maxresdefault.jpg',
       type: 'video',
     },
   ]

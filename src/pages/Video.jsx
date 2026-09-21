@@ -3,6 +3,14 @@ import LazyImage from '../components/LazyImage'
 const Video = () => {
   const videos = [
     {
+      id: 0,
+      title: '"Spit or Speed"',
+      artist: null,
+      credit: 'A Short Film by Skaiz',
+      youtubeUrl: 'https://youtu.be/ZRFjy1KdAVs',
+      thumbnail: 'https://img.youtube.com/vi/ZRFjy1KdAVs/maxresdefault.jpg',
+    },
+    {
       id: 1,
       title: '"Dangerous!"',
       artist: 'DEY G ft. Adol & Syrosis',
@@ -59,7 +67,9 @@ const Video = () => {
                 <h2 className="text-xl font-serif tracking-wide">
                   {video.title}
                 </h2>
-                <p className="text-sm text-black/60 mt-1">{video.artist}</p>
+                {video.artist && (
+                  <p className="text-sm text-black/60 mt-1">{video.artist}</p>
+                )}
                 <p className="text-xs text-black/40 mt-1 tracking-wider uppercase">{video.credit}</p>
               </div>
               

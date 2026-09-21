@@ -17,6 +17,7 @@ const Navbar = () => {
     { path: '/memories', label: 'Memories', headerImage: '/Memories_Document.webp' },
     { path: '/video', label: 'Video', headerImage: '/video_document.webp' },
     { path: '/world', label: 'World', headerImage: '/world_document.webp' },
+    { path: '/outside', label: 'Outside', headerImage: '/outside_document.webp' },
   ]
 
   const isActive = (path) => location.pathname === path

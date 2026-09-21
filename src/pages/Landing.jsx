@@ -144,6 +144,13 @@ const Landing = () => {
       gif: '/light_gif.gif',
       images: [],
     },
+    outside: {
+      path: '/outside',
+      label: 'outside',
+      headerImage: '/outside_document.webp',
+      gif: '/outside_gif.webp',
+      images: [],
+    },
   }
 
   return (
@@ -194,7 +201,8 @@ const Landing = () => {
         <SectionBlock section={sections.world} className="w-[45%] ml-[5%] mb-6" />
         <SectionBlock section={sections.video} className="w-[48%] ml-[52%] -mt-16 mb-10" />
         <SectionBlock section={sections.art} className="w-[53%] ml-[3%] mb-6" />
-        <SectionBlock section={sections.light} className="w-[33%] ml-[52%] -mt-6" />
+        <SectionBlock section={sections.light} className="w-[33%] ml-[52%] -mt-6 mb-10" />
+        <SectionBlock section={sections.outside} className="w-[55%] ml-[5%]" />
       </div>
 
       {/* Mobile — simple single column stack */}
@@ -205,6 +213,7 @@ const Landing = () => {
         <SectionBlock section={sections.video} />
         <SectionBlock section={sections.art} />
         <SectionBlock section={sections.light} />
+        <SectionBlock section={sections.outside} />
       </div>
     </div>
   )

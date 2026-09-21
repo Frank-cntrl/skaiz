@@ -4,10 +4,27 @@ import LazyImage from '../components/LazyImage'
 const Editorial = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
-  // Generate array of all 45 editorial images
-  const editorialImages = Array.from({ length: 45 }, (_, i) => ({
+  // 2026 shoots — newest first
+  const newEditorial = [
+    '/editorial/2026/WEOUT_skaizsquare-8.webp',
+    '/editorial/2026/WEOUT_skaiz-17.webp',
+    '/editorial/2026/WEOUT_skaiz-20.webp',
+    '/editorial/2026/U-turnCover_Skaiz-1.webp',
+    '/editorial/2026/U-turnCover_Skaiz-2.webp',
+    '/editorial/2026/U-turnCover_Skaiz-3.webp',
+    '/editorial/2026/Domestic_Monbon-Skaiz-6.webp',
+    '/editorial/2026/Domestic_Monbon-Skaiz-72.webp',
+  ]
+
+  // Original 45 editorial images
+  const originalEditorial = Array.from(
+    { length: 45 },
+    (_, i) => `/editorial/SKAIZ.WORLD-${i + 1}.webp`
+  )
+
+  const editorialImages = [...newEditorial, ...originalEditorial].map((src, i) => ({
     id: i + 1,
-    src: `/editorial/SKAIZ.WORLD-${i + 1}.webp`,
+    src,
     alt: `Editorial ${i + 1}`,
   }))
 

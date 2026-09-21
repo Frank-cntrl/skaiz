@@ -22,6 +22,7 @@ const Light = lazy(() => import('./pages/Light.jsx'))
 const Memories = lazy(() => import('./pages/Memories.jsx'))
 const Video = lazy(() => import('./pages/Video.jsx'))
 const World = lazy(() => import('./pages/World.jsx'))
+const Outside = lazy(() => import('./pages/Outside.jsx'))
 
 // Loading fallback component
 const LoadingScreen = () => (
@@ -81,6 +82,7 @@ function App() {
             <Route path="/memories" element={<Memories />} />
             <Route path="/video" element={<Video />} />
             <Route path="/world" element={<World />} />
+            <Route path="/outside" element={<Outside />} />
           </Routes>
         </div>
       </Suspense>

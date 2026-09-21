@@ -5,10 +5,25 @@ import LazyImage from '../components/LazyImage'
 const Memories = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
-  // Generate array of all 134 memories images
-  const memoriesImages = Array.from({ length: 134 }, (_, i) => ({
+  // 2026 film — newest set first, file number order within each set
+  const newMemories = [
+    ['AugustFilm_skaiz', [2, 3, 5, 7, 11, 13, 17, 19, 21, 35, 39, 40, 42, 54, 55, 59, 63, 66, 67, 70, 71, 74, 77, 78]],
+    ['JulySkaiz', [3, 10, 13, 18, 24, 28, 32]],
+    ['YoungWorld26_Skaiz', ['02', 25, 32, 36, 41, 47, 51, 53, 58, 66, 67, 75, 77]],
+    ['julyfilme_skaiz', [13, 21, 24, 29, 31, 33]],
+    ['junefilmedited_skaiz', [3, 17, 21, 29, 55, 64, 69]],
+    ['haley_skaiz', [25, 32, 37]],
+  ].flatMap(([set, nums]) => nums.map((n) => `/Memories/2026/${set}-${n}.webp`))
+
+  // Original 134 film scans
+  const originalMemories = Array.from(
+    { length: 134 },
+    (_, i) => `/Memories/SKAIZ.WORLD_film-${i + 1}.webp`
+  )
+
+  const memoriesImages = [...newMemories, ...originalMemories].map((src, i) => ({
     id: i + 1,
-    src: `/Memories/SKAIZ.WORLD_film-${i + 1}.webp`,
+    src,
     alt: `Memory ${i + 1}`,
   }))
 

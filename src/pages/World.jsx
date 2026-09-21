@@ -9,7 +9,8 @@ const DESKTOP_LAYOUT = [
   'w-[58%] ml-[4%] mb-6',
   'w-[36%] ml-[calc(62%+10px)] -mt-10 mb-10',
   'w-[52%] ml-[2%] mb-6',
-  'w-[44%] ml-[52%] -mt-14 mb-10',
+  // Starts right of Aventuras' 54% edge — it is pulled up alongside it
+  'w-[42%] ml-[57%] -mt-14 mb-10',
   'w-[55%] ml-[6%]',
 ]
 

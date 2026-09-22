@@ -6,6 +6,10 @@ import MasonryGallery from '../components/MasonryGallery'
 const Editorial = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
+  // Kaiya's picks — these lead the gallery, ahead of the 2026 work. They stay
+  // in the gallery proper; the big cover image above it is unchanged.
+  const leadEditorial = [3, 4, 5, 6].map((n) => `/editorial/SKAIZ.WORLD-${n}.webp`)
+
   // 2026 shoots — newest first
   const newEditorial = [
     '/editorial/2026/WEOUT_skaizsquare-8.webp',
@@ -18,13 +22,13 @@ const Editorial = () => {
     '/editorial/2026/Domestic_Monbon-Skaiz-72.webp',
   ]
 
-  // Original 45 editorial images
+  // Original 45 editorial images, less the ones promoted above
   const originalEditorial = Array.from(
     { length: 45 },
     (_, i) => `/editorial/SKAIZ.WORLD-${i + 1}.webp`
-  )
+  ).filter((src) => !leadEditorial.includes(src))
 
-  const editorialImages = [...newEditorial, ...originalEditorial].map((src, i) => ({
+  const editorialImages = [...leadEditorial, ...newEditorial, ...originalEditorial].map((src, i) => ({
     id: i + 1,
     src,
     alt: `Editorial ${i + 1}`,

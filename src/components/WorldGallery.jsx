@@ -3,11 +3,12 @@ import LazyImage from './LazyImage'
 // Pseudo-random number from image id — consistent across re-renders
 const rand = (id, seed = 1) => ((id * 7 + seed * 13 + 3) % 11) / 10
 
-// Scattered collage: width 38-48%, margin-left 0-3%, so two always fit per row
+// Scattered collage: three per row. Widths stay in 26-31% and left margins in
+// 0-1.5%, so three always fit (max 97.5%) and a fourth never can (min 104%).
 const collageStyle = (id) => {
-  const w = 38 + Math.round(rand(id, 1) * 10)
+  const w = 26 + Math.round(rand(id, 1) * 5)
   const mt = -5 + Math.round(rand(id, 2) * 20)
-  const ml = Math.round(rand(id, 3) * 3)
+  const ml = Math.round(rand(id, 3) * 15) / 10
   return { width: `${w}%`, marginTop: `${mt}px`, marginLeft: `${ml}%`, marginBottom: '8px' }
 }
 

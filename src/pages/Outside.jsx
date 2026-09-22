@@ -74,10 +74,19 @@ const OUTSIDE_FILES = [
   'february2024film_03',
 ]
 
+// The girl on the stairs — pinned to the top of the page.
+const LEAD_FILE = 'SKAIZ.WORLD_film-63'
+
 const Outside = () => {
   const [selectedImage, setSelectedImage] = useState(null)
 
-  const outsideImages = OUTSIDE_FILES.map((name, i) => ({
+  // Kaiya wants the run reversed — oldest first — with the stairs shot leading.
+  const ordered = [
+    LEAD_FILE,
+    ...OUTSIDE_FILES.filter((name) => name !== LEAD_FILE).reverse(),
+  ]
+
+  const outsideImages = ordered.map((name, i) => ({
     id: i + 1,
     src: `/outside/${name}.webp`,
     alt: `Outside ${i + 1}`,
